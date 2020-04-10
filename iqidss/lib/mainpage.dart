@@ -164,6 +164,65 @@ class __DrawerState extends State<_Drawer> {
   var _currentFontSelected = '10';
   //end FontSize
 
+//alert for Change Username
+  TextEditingController customeController = new TextEditingController();
+
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('New Username'),
+            content: TextField(
+              controller: customeController,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('Save'),
+                onPressed: () {
+                  Navigator.of(context).pop(customeController.text.toString());
+                },
+              ),
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+  //end alert Change username
+
+
+//createAboutDialog
+createAboutDialog (BuildContext context) {
+    return showDialog(
+      context: context, 
+      builder: (context) {
+        return AlertDialog(
+          title: Text('About i-Qids'),
+          content: 
+          Text('The aim of the proposed solution is to provide the user an attractive and effective training digital module implements gamification element that is suitable for 4-7 years old children to enhance the Visual, Audio, Reading and Kinesthetic (VARK) skills at the young age. Further info can be found in the game section.',
+          style: TextStyle(fontSize: 12)),
+          actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+          ],
+        );
+      }
+      );
+  }
+  //end CreateAboutDialog
+
 
     @override
     Widget build(BuildContext context) {
@@ -356,6 +415,28 @@ class __DrawerState extends State<_Drawer> {
                           value: _currentFontSelected,
                         ),
                       ]), //Row
+
+                      Row(
+                        children: <Widget>[
+                          Text("Change Username"),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              createAlertDialog(context).then((onValue) {
+                                SnackBar mySnackbar = SnackBar(
+                                    content:
+                                        Text('Username change to $onValue'));
+                                Scaffold.of(context).showSnackBar(mySnackbar);
+                              });
+                            },
+                          )
+                        ],
+                      ), //Row
 
                     ],
                   ),

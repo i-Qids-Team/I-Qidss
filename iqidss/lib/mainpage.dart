@@ -36,7 +36,7 @@ class Main extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.blue[300],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),//15
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Body Part", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -50,7 +50,7 @@ class Main extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.purple[200],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),//15
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Animal", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -64,7 +64,7 @@ class Main extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.lightGreen[200],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),//15
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Color", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -78,7 +78,7 @@ class Main extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.redAccent[100],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),//15
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Sport", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(

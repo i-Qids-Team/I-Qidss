@@ -6,44 +6,121 @@ void _doNothing(){}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //     child: ListView(
-      //       children: <Widget>[
-      //         DrawerHeader(
-      //           decoration: BoxDecoration(
-      //           image: DecorationImage(
-      //             image: AssetImage('assets/bg.png'),
-      //             fit: BoxFit.cover,
-      //         ),
-      //         ),
-      //         child: Image(
-      //            alignment: Alignment.center,
-      //             fit:  BoxFit.contain,
-      //             image: AssetImage('assets/main.gif'),
-      //         ),
-      //           ),
-      //             ListTitle(Icons.person,'Profile', _doNothing ),
-      //             ListTitle(Icons.notifications,'Notification', _doNothing ),
-      //             ListTitle(Icons.settings,'Setting', _doNothing ),
-      //       ],
-      //     ),
-      //   ),  
+      drawer: Drawer(
+          child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Image(
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                image: AssetImage('assets/main.gif'),
+              ),
+            ),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.person),
+                          title: Text('Profile'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.notifications),
+                          title: Text('Notification'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.settings),
+                          title: Text('Setting'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.exit_to_app),
+                          title: Text('Logout'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Logout()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+          ],
+        ),
+        ),  
       appBar: AppBar(   
         leading: IconButton(icon: Icon(Icons.settings), onPressed: _doNothing),   
         title: Text('Welcome Corona!'),      
         backgroundColor: Colors.brown[100],
         actions: <Widget> [          
-          // Material(            
-          //   child: InkWell(
-          //     onTap: _doNothing,              
-          //     child:  Image(
-          //         alignment: Alignment.topRight,
-          //         fit:  BoxFit.contain,
-          //         image: AssetImage('assets/logout.png'),
-                  
-          // ),
-          //   )
-          // ),  
         ]
         ), 
         body: Container(
@@ -63,15 +140,7 @@ void _doNothing(){}
                 'assets/main.gif',
                 height: 190,
               ),
-          // Container(
-          //   height: 170.0,
-          //   decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //           image: AssetImage('assets/main.gif'))
-          //  ),
-          // ),
-          // Image(image: AssetImage("assets/ajax-main.gif")),
-      SizedBox(height: 20.0),
+              SizedBox(height: 20.0),
                 SizedBox(
                   height: 70,
                   width: double.infinity,
@@ -155,7 +224,6 @@ class ListTitle extends StatelessWidget {
         ),
         child: InkWell(
           splashColor: Colors.orangeAccent,
-          onTap: onTap,
           child: Container(
             height: 70,
             child: Row(
@@ -180,5 +248,97 @@ class ListTitle extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Notification extends StatelessWidget {
+  final items = List<String>.generate(5, (i) => "Message ${i + 1}");
+
+  Function setState;
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Messages"),
+          backgroundColor: Colors.orangeAccent,
+        ),
+        body: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              Icon(Icons.delete);
+              return Dismissible(
+                key: Key(item),
+                onDismissed: (direction) {
+                  setState(() {
+                    items.removeAt(index);
+                  });
+                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("Message deleted")));
+                },
+                background: Container(
+                  child: Center(
+                    child: Text(
+                      'Deleted',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  color: Colors.red,
+                ),
+                child: Card(
+                  color: const Color(0xFFFCE4EC),
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_active),
+                    title: Text('$item'),
+                    subtitle: Text('Collect more score to beat others. '
+                        '20/3/2020'),
+                    isThreeLine: true,
+                    // trailing: Icon(Icons.swap_horizontal_circle),
+                  ),
+                ),
+              );
+            }));
+  } // itemBuilder
+}
+
+class Logout extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Logout Session'),
+          backgroundColor: Colors.orangeAccent,
+        ),
+        body: Container(
+            color: Colors.red[100],
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: <Widget>[
+                Text("You have successfully logged out",
+                    style: TextStyle(fontSize: 20, color: Colors.black)),
+                Image.asset(
+                  'assets/main.gif',
+                  alignment: Alignment.center,
+                  height: 210,
+                ),
+                SizedBox(height: 10.0),
+                SizedBox(
+                  height: 70,
+                  width: double.infinity,
+                  child: RaisedButton(
+                    color: Colors.yellow[600],
+                    textColor: Colors.black,
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text("Login", style: TextStyle(fontSize: 25)),
+                    onPressed: () {
+                      return Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Notification()),
+                      );
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                  ),
+                ),
+              ],
+            )));
   }
 }

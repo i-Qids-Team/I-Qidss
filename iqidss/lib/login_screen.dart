@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splash_screen_demo/home_screen.dart';
+import 'package:iqidss/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override

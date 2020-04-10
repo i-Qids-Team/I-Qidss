@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shimmer/shimmer.dart';
-import 'package:splash_screen_demo/login_screen.dart';
+import 'package:iqidss/login_screen.dart';
 
 import 'login_screen.dart';
 

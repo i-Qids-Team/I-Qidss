@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
 
 class Main extends StatefulWidget {
-
   @override
   _MainState createState() => _MainState();
 }
@@ -11,15 +10,15 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(          
-          title: Text('Welcome Corona!'),
-          backgroundColor: Colors.red[300],
-          ),
-          drawer: _Drawer(),
-          body: Container(
-          padding: const EdgeInsets.all(10.0),
-          height: double.infinity,
-          decoration: BoxDecoration(
+      appBar: AppBar(
+        title: Text('Welcome Corona!'),
+        backgroundColor: Colors.red[300],
+      ),
+      drawer: _Drawer(),
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        height: double.infinity,
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bg.png'),
             fit: BoxFit.cover,
@@ -141,16 +140,14 @@ class ListTitle extends StatelessWidget {
   }
 }
 
-  class _Drawer extends StatefulWidget {
+class _Drawer extends StatefulWidget {
   @override
   __DrawerState createState() => __DrawerState();
 }
 
 class __DrawerState extends State<_Drawer> {
-
-
 //Switch
- bool _value = false;
+  bool _value = false;
 
   void _onChanged(bool value) {
     setState(() {
@@ -159,7 +156,7 @@ class __DrawerState extends State<_Drawer> {
   } //endSwitch
 
 //fontSize
- // String fontSize = "";
+  // String fontSize = "";
   var _fontsize = ['2', '4', '6', '8', '10', '12'];
   var _currentFontSelected = '10';
   //end FontSize
@@ -197,18 +194,17 @@ class __DrawerState extends State<_Drawer> {
   }
   //end alert Change username
 
-
 //createAboutDialog
-createAboutDialog (BuildContext context) {
+  createAboutDialog(BuildContext context) {
     return showDialog(
-      context: context, 
-      builder: (context) {
-        return AlertDialog(
-          title: Text('About i-Qids'),
-          content: 
-          Text('The aim of the proposed solution is to provide the user an attractive and effective training digital module implements gamification element that is suitable for 4-7 years old children to enhance the Visual, Audio, Reading and Kinesthetic (VARK) skills at the young age. Further info can be found in the game section.',
-          style: TextStyle(fontSize: 12)),
-          actions: <Widget>[
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('About i-Qids'),
+            content: Text(
+                'The aim of the proposed solution is to provide the user an attractive and effective training digital module implements gamification element that is suitable for 4-7 years old children to enhance the Visual, Audio, Reading and Kinesthetic (VARK) skills at the young age. Further info can be found in the game section.',
+                style: TextStyle(fontSize: 12)),
+            actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
                 child: Text('close'),
@@ -216,125 +212,123 @@ createAboutDialog (BuildContext context) {
                   Navigator.of(context).pop();
                 },
               ),
-          ],
-        );
-      }
-      );
+            ],
+          );
+        });
   }
   //end CreateAboutDialog
 
-
-    @override
-    Widget build(BuildContext context) {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/bg.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Image(
-                alignment: Alignment.center,
-                fit: BoxFit.contain,
-                image: AssetImage('assets/main.gif'),
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.png'),
+                fit: BoxFit.cover,
               ),
             ),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
-                    ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.person),
-                          title: Text('Profile'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserProfile ()),
-                            );
-                          },
-                        ),
+            child: Image(
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+              image: AssetImage('assets/main.gif'),
+            ),
+          ),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Profile'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserProfile()),
+                          );
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.notifications),
-                          title: Text('Notification'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notification()),
-                            );
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.notifications),
+                        title: Text('Notification'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notification()),
+                          );
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.settings),
-                          title: Text('Setting'),
-                          onTap: () {
-                            _settingBottomSheet(context);
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.settings),
+                        title: Text('Setting'),
+                        onTap: () {
+                          _settingBottomSheet(context);
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.exit_to_app),
-                          title: Text('Logout'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Logout()),
-                            );
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.exit_to_app),
+                        title: Text('Logout'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Logout()),
+                          );
+                        },
                       ),
-                    ))),
-          ],
-        ),
-      );    
-    }
+                    ),
+                  ))),
+        ],
+      ),
+    );
+  }
 
-    //function _settingBottomSheet
+  //function _settingBottomSheet
   void _settingBottomSheet(context) {
     showModalBottomSheet(
         context: context,
@@ -360,13 +354,11 @@ createAboutDialog (BuildContext context) {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          
                           Text("SETTING PAGE",
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold)),
-
                           Spacer(),
                           IconButton(
                             icon: Icon(
@@ -381,7 +373,7 @@ createAboutDialog (BuildContext context) {
                         ],
                       ), //Row
 
-                       Row(
+                      Row(
                         children: <Widget>[
                           Text(
                             "Sound Mute",
@@ -430,7 +422,7 @@ createAboutDialog (BuildContext context) {
                               createAlertDialog(context).then((onValue) {
                                 SnackBar mySnackbar = SnackBar(
                                     content:
-                                        Text('Username change to $onValue'));
+                                        Text('Sucessfully change username'));
                                 Scaffold.of(context).showSnackBar(mySnackbar);
                               });
                             },
@@ -438,14 +430,29 @@ createAboutDialog (BuildContext context) {
                         ],
                       ), //Row
 
+                      Row(
+                        children: <Widget>[
+                          Text("About i-Qids"),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.info,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              // createAlertDialog(context).then((onValue) {});
+                              createAboutDialog(context);
+                            },
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                  
                 ),
               ));
         });
   }
-
 }
 
 class Notification extends StatelessWidget {

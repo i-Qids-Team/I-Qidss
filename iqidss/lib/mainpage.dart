@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
 
-class Main extends StatelessWidget {
+class Main extends StatefulWidget {
 
+  @override
+  _MainState createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,6 +147,10 @@ class ListTitle extends StatelessWidget {
 }
 
 class __DrawerState extends State<_Drawer> {
+
+
+
+
     @override
     Widget build(BuildContext context) {
       return Drawer(
@@ -220,11 +229,7 @@ class __DrawerState extends State<_Drawer> {
                           leading: Icon(Icons.settings),
                           title: Text('Setting'),
                           onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notification()),
-                            );
+                            _settingBottomSheet(context);
                           },
                         ),
                       ),
@@ -255,6 +260,32 @@ class __DrawerState extends State<_Drawer> {
         ),
       );    
     }
+
+    //function _settingBottomSheet
+  void _settingBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+              // margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
+              color: Color(0xFF737373),
+              child: Container(
+                decoration: BoxDecoration(
+                    // color: Theme.of(context).canvasColor,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(30),
+                      topRight: const Radius.circular(30),
+                    )),
+                height: 350,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  
+                ),
+              ));
+        });
+  }
+
 }
 
 class Notification extends StatelessWidget {

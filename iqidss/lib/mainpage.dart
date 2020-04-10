@@ -6,44 +6,33 @@ void _doNothing(){}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //     child: ListView(
-      //       children: <Widget>[
-      //         DrawerHeader(
-      //           decoration: BoxDecoration(
-      //           image: DecorationImage(
-      //             image: AssetImage('assets/bg.png'),
-      //             fit: BoxFit.cover,
-      //         ),
-      //         ),
-      //         child: Image(
-      //            alignment: Alignment.center,
-      //             fit:  BoxFit.contain,
-      //             image: AssetImage('assets/main.gif'),
-      //         ),
-      //           ),
-      //             ListTitle(Icons.person,'Profile', _doNothing ),
-      //             ListTitle(Icons.notifications,'Notification', _doNothing ),
-      //             ListTitle(Icons.settings,'Setting', _doNothing ),
-      //       ],
-      //     ),
-      //   ),  
+      drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg.png'),
+                  fit: BoxFit.cover,
+              ),
+              ),
+              child: Image(
+                 alignment: Alignment.center,
+                  fit:  BoxFit.contain,
+                  image: AssetImage('assets/main.gif'),
+              ),
+                ),
+                  ListTitle(Icons.person,'Profile', _doNothing ),
+                  ListTitle(Icons.notifications,'Notification', _doNothing ),
+                  ListTitle(Icons.settings,'Setting', _doNothing ),
+            ],
+          ),
+        ),  
       appBar: AppBar(   
         leading: IconButton(icon: Icon(Icons.settings), onPressed: _doNothing),   
         title: Text('Welcome Corona!'),      
         backgroundColor: Colors.brown[100],
         actions: <Widget> [          
-          // Material(            
-          //   child: InkWell(
-          //     onTap: _doNothing,              
-          //     child:  Image(
-          //         alignment: Alignment.topRight,
-          //         fit:  BoxFit.contain,
-          //         image: AssetImage('assets/logout.png'),
-                  
-          // ),
-          //   )
-          // ),  
         ]
         ), 
         body: Container(
@@ -63,15 +52,7 @@ void _doNothing(){}
                 'assets/main.gif',
                 height: 190,
               ),
-          // Container(
-          //   height: 170.0,
-          //   decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //           image: AssetImage('assets/main.gif'))
-          //  ),
-          // ),
-          // Image(image: AssetImage("assets/ajax-main.gif")),
-      SizedBox(height: 20.0),
+              SizedBox(height: 20.0),
                 SizedBox(
                   height: 70,
                   width: double.infinity,

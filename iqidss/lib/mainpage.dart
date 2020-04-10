@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iqidss/UserProfile.dart';
 
 class Main extends StatelessWidget {
 
@@ -171,7 +172,7 @@ class ListTitle extends StatelessWidget {
                             return Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Notification()),
+                                  builder: (context) => UserProfile ()),
                             );
                           },
                         ),

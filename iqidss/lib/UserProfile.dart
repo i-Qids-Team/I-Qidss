@@ -50,7 +50,27 @@ class UserProfile extends StatelessWidget {
                     textAlign: TextAlign.center,
                     ),
                    ),                   
-                 ),                                  
+                 ), 
+                 SizedBox(height: 10.0),
+                 Container(
+                   height: 60,
+                   width: double.infinity,                   
+                   padding: const EdgeInsets.all(15.0),  
+                  decoration: BoxDecoration( 
+                   color: Colors.white,                   
+                       border: Border.all(
+                       color: Colors.white,width: 10,                       
+                     ),                                          
+                     borderRadius: BorderRadius.all(Radius.circular(200),),
+                 ),               
+                   child:Center(
+                     child:
+                     Text("Score:  0)",               
+                    style: TextStyle(fontSize: 30, color: Colors.black,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                    ),
+                   ),                   
+                 ),                                    
               ],
             )));
   }

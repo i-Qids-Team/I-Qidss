@@ -149,6 +149,15 @@ class ListTitle extends StatelessWidget {
 class __DrawerState extends State<_Drawer> {
 
 
+//Switch
+ bool _value = false;
+
+  void _onChanged(bool value) {
+    setState(() {
+      _value = value;
+    });
+  } //endSwitch
+
 
 
     @override
@@ -305,6 +314,22 @@ class __DrawerState extends State<_Drawer> {
                               Navigator.of(context).pop();
                             },
                           )
+                        ],
+                      ), //Row
+
+                       Row(
+                        children: <Widget>[
+                          Text(
+                            "Sound Mute",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Spacer(),
+                          new Switch(
+                              activeColor: Colors.green,
+                              value: _value,
+                              onChanged: (bool value) {
+                                _onChanged(value);
+                              }),
                         ],
                       ), //Row
 

@@ -136,7 +136,12 @@ class ListTitle extends StatelessWidget {
   }
 }
 
-  class _Drawer extends StatelessWidget {
+  class _Drawer extends StatefulWidget {
+  @override
+  __DrawerState createState() => __DrawerState();
+}
+
+class __DrawerState extends State<_Drawer> {
     @override
     Widget build(BuildContext context) {
       return Drawer(
@@ -250,7 +255,7 @@ class ListTitle extends StatelessWidget {
         ),
       );    
     }
-  }
+}
 
 class Notification extends StatelessWidget {
   final items = List<String>.generate(5, (i) => "Message ${i + 1}");

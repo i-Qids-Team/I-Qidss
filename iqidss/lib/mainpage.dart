@@ -280,6 +280,36 @@ class __DrawerState extends State<_Drawer> {
                 height: 350,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          
+                          Text("SETTING PAGE",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      ), //Row
+
+                    ],
+                  ),
                   
                 ),
               ));

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/splash_screen.dart';
 
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,5 +14,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreen()
     );
+    
   }
 }

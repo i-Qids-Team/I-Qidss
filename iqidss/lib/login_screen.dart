@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/home_screen.dart';
+import 'package:iqidss/mainpage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         if(usernameController != null && usernameController.text == "abc")
           {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Main()));
           }
         else
           {

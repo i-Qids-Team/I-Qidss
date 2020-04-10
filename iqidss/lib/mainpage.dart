@@ -8,25 +8,113 @@ void _doNothing(){}
     return Scaffold(
       drawer: Drawer(
           child: ListView(
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/bg.png'),
                   fit: BoxFit.cover,
-              ),
+                ),
               ),
               child: Image(
-                 alignment: Alignment.center,
-                  fit:  BoxFit.contain,
-                  image: AssetImage('assets/main.gif'),
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                image: AssetImage('assets/main.gif'),
               ),
-                ),
-                  ListTitle(Icons.person,'Profile', _doNothing ),
-                  ListTitle(Icons.notifications,'Notification', _doNothing ),
-                  ListTitle(Icons.settings,'Setting', _doNothing ),
-            ],
-          ),
+            ),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.person),
+                          title: Text('Profile'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.notifications),
+                          title: Text('Notification'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.settings),
+                          title: Text('Setting'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+            Card(
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.red.shade600)),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.orangeAccent,
+                      child: Container(
+                        height: 60,
+                        child: ListTile(
+                          leading: Icon(Icons.exit_to_app),
+                          title: Text('Logout'),
+                          onTap: () {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Notification()),
+                            );
+                          },
+                        ),
+                      ),
+                    ))),
+          ],
+        ),
         ),  
       appBar: AppBar(   
         leading: IconButton(icon: Icon(Icons.settings), onPressed: _doNothing),   
@@ -136,7 +224,6 @@ class ListTitle extends StatelessWidget {
         ),
         child: InkWell(
           splashColor: Colors.orangeAccent,
-          onTap: onTap,
           child: Container(
             height: 70,
             child: Row(
@@ -163,3 +250,27 @@ class ListTitle extends StatelessWidget {
     );
   }
 }
+
+class Notification extends StatelessWidget {
+
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Messages"),
+          backgroundColor: Colors.orangeAccent,
+        ),
+        body:Card(
+                  color: const Color(0xFFFCE4EC),
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_active),
+                    title: Text('Message 1'),
+                    subtitle: Text('Collect more score to beat others. '
+                        '20/3/2020'),
+                    isThreeLine: true,
+                    // trailing: Icon(Icons.swap_horizontal_circle),
+                  ),
+                ),
+              );
+            }
+  } // itemBuilder

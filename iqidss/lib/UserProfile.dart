@@ -18,7 +18,8 @@ class UserProfile extends StatelessWidget {
                 Text("Welcome!",
                     style: TextStyle(fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold)), 
                      SizedBox(height: 20.0),            
-                Container(    
+                Container(   
+                  height: 210, 
                  decoration: BoxDecoration( 
                    color: Colors.white,
                        border: Border.all(
@@ -53,7 +54,7 @@ class UserProfile extends StatelessWidget {
                  ), 
                  SizedBox(height: 10.0),
                  Container(
-                   height: 60,
+                   height: 80,
                    width: double.infinity,                   
                    padding: const EdgeInsets.all(15.0),  
                   decoration: BoxDecoration( 
@@ -65,7 +66,7 @@ class UserProfile extends StatelessWidget {
                  ),               
                    child:Center(
                      child:
-                     Text("Score:  0)",               
+                     Text("Score:  0",               
                     style: TextStyle(fontSize: 30, color: Colors.black,fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                     ),

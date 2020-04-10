@@ -158,6 +158,11 @@ class __DrawerState extends State<_Drawer> {
     });
   } //endSwitch
 
+//fontSize
+ // String fontSize = "";
+  var _fontsize = ['2', '4', '6', '8', '10', '12'];
+  var _currentFontSelected = '10';
+  //end FontSize
 
 
     @override
@@ -332,6 +337,25 @@ class __DrawerState extends State<_Drawer> {
                               }),
                         ],
                       ), //Row
+
+                      Row(children: <Widget>[
+                        Text("Font Size"),
+                        Spacer(),
+                        DropdownButton<String>(
+                          items: _fontsize.map((String dropDownStringItem) {
+                            return DropdownMenuItem<String>(
+                              value: dropDownStringItem,
+                              child: Text(dropDownStringItem),
+                            );
+                          }).toList(),
+                          onChanged: (String newValueSelected) {
+                            setState(() {
+                              this._currentFontSelected = newValueSelected;
+                            });
+                          },
+                          value: _currentFontSelected,
+                        ),
+                      ]), //Row
 
                     ],
                   ),

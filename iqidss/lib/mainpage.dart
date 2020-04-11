@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
+import 'package:iqidss/login_screen.dart';
 
 class Main extends StatefulWidget {
   @override
@@ -535,7 +536,7 @@ class Logout extends StatelessWidget {
                     onPressed: () {
                       return Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Notification()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     shape: RoundedRectangleBorder(

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:shimmer/shimmer.dart';
 import 'package:iqidss/login_screen.dart';
 
-import 'login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {

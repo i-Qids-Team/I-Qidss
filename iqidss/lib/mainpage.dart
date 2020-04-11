@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
+import 'package:iqidss/NotificationBar.dart';
+import 'package:iqidss/Logout.dart';
 
 class Main extends StatefulWidget {
   @override
@@ -276,7 +278,7 @@ class __DrawerState extends State<_Drawer> {
                           return Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Notification()),
+                                builder: (context) => NotificationBar()),
                           );
                         },
                       ),
@@ -455,94 +457,3 @@ class __DrawerState extends State<_Drawer> {
   }
 }
 
-class Notification extends StatelessWidget {
-  final items = List<String>.generate(5, (i) => "Message ${i + 1}");
-
-  Function setState;
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Messages"),
-          backgroundColor: Colors.orangeAccent,
-        ),
-        body: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              Icon(Icons.delete);
-              return Dismissible(
-                key: Key(item),
-                onDismissed: (direction) {
-                  setState(() {
-                    items.removeAt(index);
-                  });
-                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("Message deleted")));
-                },
-                background: Container(
-                  child: Center(
-                    child: Text(
-                      'Deleted',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  color: Colors.red,
-                ),
-                child: Card(
-                  color: const Color(0xFFFCE4EC),
-                  child: ListTile(
-                    leading: Icon(Icons.notifications_active),
-                    title: Text('$item'),
-                    subtitle: Text('Collect more score to beat others. '
-                        '20/3/2020'),
-                    isThreeLine: true,
-                    // trailing: Icon(Icons.swap_horizontal_circle),
-                  ),
-                ),
-              );
-            }));
-  } // itemBuilder
-}
-
-class Logout extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Logout Session'),
-          backgroundColor: Colors.orangeAccent,
-        ),
-        body: Container(
-            color: Colors.red[100],
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              children: <Widget>[
-                Text("You have successfully logged out",
-                    style: TextStyle(fontSize: 20, color: Colors.black)),
-                Image.asset(
-                  'assets/main.gif',
-                  alignment: Alignment.center,
-                  height: 210,
-                ),
-                SizedBox(height: 10.0),
-                SizedBox(
-                  height: 70,
-                  width: double.infinity,
-                  child: RaisedButton(
-                    color: Colors.yellow[600],
-                    textColor: Colors.black,
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text("Login", style: TextStyle(fontSize: 25)),
-                    onPressed: () {
-                      return Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Notification()),
-                      );
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                  ),
-                ),
-              ],
-            )));
-  }
-}

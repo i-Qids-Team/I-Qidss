@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome Corona'),
+        title: Text('Welcome ' + value + "!"),
         backgroundColor: Colors.red[300],
       ),
       drawer: _Drawer(),

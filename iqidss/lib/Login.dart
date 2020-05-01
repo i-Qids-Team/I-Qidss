@@ -79,14 +79,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         ),
                         MaterialButton(
-                          onPressed: (){if(usernameController.text.isNotEmpty)
-          {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(value : value)));
-          }
-        else
-          {
-                _showAlertDialog();
-          }},
+                          onPressed: (){
+                            if(usernameController.text.isNotEmpty)
+                            {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(value : value)));
+                            }
+                            else
+                            {
+                              _showAlertDialog();
+                            }
+                          },
                           minWidth: 250.0,
                           splashColor: Colors.red[800],
                           color: Colors.red,

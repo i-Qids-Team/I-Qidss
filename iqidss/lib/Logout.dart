@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/login_screen.dart';
+import 'package:iqidss/Login.dart';
 
-class Logout extends StatelessWidget {
+class LogoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

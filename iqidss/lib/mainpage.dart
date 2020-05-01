@@ -3,17 +3,23 @@ import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 
-class Main extends StatefulWidget {
+class MainPage extends StatefulWidget {
+  String value;
+  MainPage({this.value});
+
   @override
-  _MainState createState() => _MainState();
+  _MainPageState createState() => _MainPageState(value);
 }
 
-class _MainState extends State<Main> {
+class _MainPageState extends State<MainPage> {
+  String value;
+  _MainPageState(this.value);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome Corona!'),
+        title: Text('Welcome Corona'),
         backgroundColor: Colors.red[300],
       ),
       drawer: _Drawer(),
@@ -29,8 +35,6 @@ class _MainState extends State<Main> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Score: 0",
-                style: TextStyle(fontSize: 20, color: Colors.white)),
             Image.asset(
               'assets/main.gif',
               height: 190,
@@ -319,7 +323,7 @@ class __DrawerState extends State<_Drawer> {
                         onTap: () {
                           return Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Logout()),
+                            MaterialPageRoute(builder: (context) => LogoutPage()),
                           );
                         },
                       ),

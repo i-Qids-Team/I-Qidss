@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
+import 'package:iqidss/shape/Screen/GamePage.dart';
 
 
 class ShapeGame extends StatefulWidget {
@@ -40,7 +41,12 @@ class _ShapeGame extends State<ShapeGame> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Play Now", style: TextStyle(fontSize: 25)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GamePage()),
+                  );
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

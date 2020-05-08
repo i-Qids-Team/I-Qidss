@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iqidss/vegetables/model/vegetable_data.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'vegetable_score.dart';
+
 
 VegetableData questData = new VegetableData();
 
@@ -63,6 +65,7 @@ class _VegetableQuestionPageState extends State<VegetableQuestionPage> {
     //check if the question is finish
     if (questData.questFinish() == true) {
       print('Question is Finish');
+      int totalScore = totalCorrect;
       Alert(
           context: context,
           title: 'The Game is Over',
@@ -71,7 +74,14 @@ class _VegetableQuestionPageState extends State<VegetableQuestionPage> {
             DialogButton(
                 child: Text('Score'),
                 onPressed: () {
-                  
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VegetableScore(
+                                score: totalScore,
+                                totalQuestion: questData.printQuestionLength(),
+                                compliments: compliments,
+                              )));
                 })
           ]).show();
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/vegetable/model/vegetableData.dart';
+import 'package:iqidss/vegetable/screen/vegetable_score.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 VegetableData questData = new VegetableData();

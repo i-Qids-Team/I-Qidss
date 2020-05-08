@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         initialRoute: '/',
         routes: {
-          '/vegetable': (context) => VegetableHome(),
+          '/vegetable_screen': (context) => VegetableHome(),
         },
         theme: ThemeData(
           primarySwatch: Colors.yellow,

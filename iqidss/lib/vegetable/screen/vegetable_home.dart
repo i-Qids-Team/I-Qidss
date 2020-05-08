@@ -39,7 +39,7 @@ class _VegetablePageState extends State<VegetablePage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Lets", style: TextStyle(fontSize: 25, letterSpacing: 3 )),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/vegetable');
+                  Navigator.pushNamed(context, '/vegetable_question');
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

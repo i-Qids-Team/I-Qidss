@@ -100,7 +100,10 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Vegetables", style: TextStyle(fontSize: 25)),
                 onPressed: () {
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => VegetableHome()),
+                  );
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),

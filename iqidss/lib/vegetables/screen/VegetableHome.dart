@@ -32,7 +32,7 @@ class VegetableHome extends StatelessWidget {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Lets", style: TextStyle(fontSize: 25, letterSpacing: 3 )),
                 onPressed: () {
-                  
+                  Navigator.pushNamed(context, '/vegetable');
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

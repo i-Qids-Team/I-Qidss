@@ -50,8 +50,8 @@ class _MainPageState extends State<MainPage> {
                 color: Colors.blue[300],
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
-                child: Text("Body Part", style: TextStyle(fontSize: 25)),
-                onPressed: () {},
+                child: Text("Shape", style: TextStyle(fontSize: 25)),
+                onPressed: (){},
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

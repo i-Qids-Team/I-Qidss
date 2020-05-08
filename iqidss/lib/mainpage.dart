@@ -4,6 +4,7 @@ import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 import 'package:iqidss/animal/screen/animalsplashscreen.dart';
 import 'package:iqidss/vegetable/screen/vegetable_home.dart';
+import 'package:iqidss/shape/Screen/ShapeGame.dart';
 
 class MainPage extends StatefulWidget {
  final String name;
@@ -51,7 +52,12 @@ class _MainPageState extends State<MainPage> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Shape", style: TextStyle(fontSize: 25)),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShapeGame()),
+                  );
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

@@ -3,8 +3,7 @@ import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 import 'package:iqidss/animal/screen/animalsplashscreen.dart';
-
-import 'vegetables/screen/VegetableHome.dart';
+import 'package:iqidss/vegetable/screen/vegetable_home.dart';
 
 class MainPage extends StatefulWidget {
  final String name;
@@ -102,7 +101,7 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VegetableHome()),
+                    MaterialPageRoute(builder: (context) => VegetablePage()),
                   );
                 },
                 shape: RoundedRectangleBorder(

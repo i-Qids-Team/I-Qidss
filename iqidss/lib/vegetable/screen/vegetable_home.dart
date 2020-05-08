@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class VegetableHome extends StatelessWidget {
-  const VegetableHome({Key key}) : super(key: key);
+class VegetablePage extends StatefulWidget {
+  const VegetablePage({Key key}) : super(key: key);
 
   @override
-   Widget build(BuildContext context) {
+  _VegetablePageState createState() => _VegetablePageState();
+}
+
+class _VegetablePageState extends State<VegetablePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Vegetables'),
@@ -30,9 +35,10 @@ class VegetableHome extends StatelessWidget {
                 color: Colors.red[50],
                 textColor: Colors.red,
                 padding: const EdgeInsets.all(15.0),
-                child: Text("Lets", style: TextStyle(fontSize: 25, letterSpacing: 3 )),
+                child: Text("Lets",
+                    style: TextStyle(fontSize: 25, letterSpacing: 3)),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/vegetable');
+                  Navigator.pushNamed(context, '/vegetable_screen');
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/vegetables/model/vegetable_data.dart';
+import 'package:iqidss/vegetable/model/vegetableData.dart';
+import 'package:iqidss/vegetable/screen/vegetable_score.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-import 'vegetable_score.dart';
-
 
 VegetableData questData = new VegetableData();
 
-class VegetableQuestion extends StatefulWidget {
+class VegetableScreen extends StatefulWidget {
 
   @override
-  _VegetableQuestionState createState() => _VegetableQuestionState();
+  _VegetableScreenState createState() => _VegetableScreenState();
 }
 
-class _VegetableQuestionState extends State<VegetableQuestion> {
+class _VegetableScreenState extends State<VegetableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,20 +22,20 @@ class _VegetableQuestionState extends State<VegetableQuestion> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 0.0),
-          child: VegetableQuestionPage(),
+          child: VegetableScreenPage(),
         ),
       ),
     );
   }
 }
 
-class VegetableQuestionPage extends StatefulWidget {
+class VegetableScreenPage extends StatefulWidget {
 
   @override
-  _VegetableQuestionPageState createState() => _VegetableQuestionPageState();
+  _VegetableScreenPageState createState() => _VegetableScreenPageState();
 }
 
-class _VegetableQuestionPageState extends State<VegetableQuestionPage> {
+class _VegetableScreenPageState extends State<VegetableScreenPage> {
 
   int totalCorrect = 0;
   int totalQuestion = 0;

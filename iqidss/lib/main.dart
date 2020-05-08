@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/SplashScreen.dart';
-import 'package:iqidss/vegetables/screen/VegetableHome.dart';
+import 'package:iqidss/vegetable/screen/vegetable_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         initialRoute: '/',
         routes: {
-          '/vegetable': (context) => VegetableHome(),
+          '/vegetable_screen': (context) => VegetableScreen(),
         },
         theme: ThemeData(
           primarySwatch: Colors.yellow,

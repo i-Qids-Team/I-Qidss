@@ -23,7 +23,7 @@ class _VegetableScoreState extends State<VegetableScore> {
             icon: Icon(Icons.close, size: 30.0),
             onPressed: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context)=> Main()));
-              Navigator.popUntil(context, ModalRoute.withName("/mainpage"));
+              // Navigator.popUntil(context, ModalRoute.withName("/mainpage"));
             },
           ),
         ],

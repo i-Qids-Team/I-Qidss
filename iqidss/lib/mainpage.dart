@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
-import 'package:iqidss/animal/screen/animalsplashscreen.dart';
 
 class MainPage extends StatefulWidget {
-  final String name;
-  MainPage(this.name);
+  String value;
+  MainPage({this.value});
 
   @override
-  _MainPageState createState() => _MainPageState(name);
+  _MainPageState createState() => _MainPageState(value);
 }
 
 class _MainPageState extends State<MainPage> {
@@ -63,12 +62,7 @@ class _MainPageState extends State<MainPage> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Animal", style: TextStyle(fontSize: 25)),
-                onPressed: () {
-                   Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (_) {
-                    return AnimalSplashScreen(widget.name);
-                  }));
-                },
+                onPressed: () {},
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

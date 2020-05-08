@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -10,6 +10,22 @@ class GamePage extends StatefulWidget {
 
 class _GamePage extends State<GamePage> with TickerProviderStateMixin {
   MockData mockData = MockData();
+  int score = 0;
+
+  void _checkAnswer(choice) {
+    if (mockData.getCorrectAnswer() == choice) {
+      score++;
+      print(score);
+
+      if (mockData.lastQuestion() == true) {
+        print('questionfinish');
+        Alert(context: context, title: 'Well Done!', buttons: [
+          DialogButton(child: Text(' VIEW YOUR SCORE'), onPressed: () {})
+        ]).show();
+      } else
+        mockData.nextQuestion();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +33,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
       appBar: AppBar(
           title: Text('Corona, play Shape!'),
           backgroundColor: Colors.red[300],
-          actions: <Widget>[
-          ]),
+          actions: <Widget>[]),
       body: Container(
         padding: const EdgeInsets.all(10.0),
         height: double.infinity,
@@ -54,7 +69,12 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
                 child: const Text('True', style: TextStyle(fontSize: 18)),
                 color: Colors.green,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _checkAnswer(true);
+                  });
+                  score++;
+                },
               ),
             ),
             SizedBox(height: 10.0),
@@ -65,7 +85,11 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
                 child: const Text('False', style: TextStyle(fontSize: 18)),
                 color: Colors.red,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _checkAnswer(false);
+                  });
+                },
               ),
             ),
           ],

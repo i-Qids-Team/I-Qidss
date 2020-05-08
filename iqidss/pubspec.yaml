@@ -63,6 +63,13 @@ flutter:
     - assets/vegefruitbg3.gif
     - assets/ready.gif
 
+    - assets/shape.gif
+    - assets/square.png
+    - assets/happycat.gif
+    - assets/cylinder.png
+    - assets/circle.png
+    - assets/triangle.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

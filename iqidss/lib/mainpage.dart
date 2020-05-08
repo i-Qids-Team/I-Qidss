@@ -4,6 +4,8 @@ import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 import 'package:iqidss/animal/screen/animalsplashscreen.dart';
 
+import 'vegetables/screen/VegetableHome.dart';
+
 class MainPage extends StatefulWidget {
  final String name;
   MainPage(this.name);
@@ -96,8 +98,10 @@ class _MainPageState extends State<MainPage> {
                 color: Colors.redAccent[100],
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
-                child: Text("Sport", style: TextStyle(fontSize: 25)),
-                onPressed: () {},
+                child: Text("Vegetables", style: TextStyle(fontSize: 25)),
+                onPressed: () {
+                  
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

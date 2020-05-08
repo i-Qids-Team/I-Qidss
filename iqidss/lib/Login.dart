@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/MainPage.dart';
+
+import 'mainpage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -82,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: (){
                             if(usernameController.text.isNotEmpty)
                             {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(value : value)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(value)));
                             }
                             else
                             {

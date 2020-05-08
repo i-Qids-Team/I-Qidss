@@ -1,6 +1,6 @@
 import 'package:iqidss/vegetables/model/vegetable_model.dart';
 
-class QuestionData {
+class VegetableData {
   int _questionNumber = 0;
 
   List<VegetableQuestion> _question = [

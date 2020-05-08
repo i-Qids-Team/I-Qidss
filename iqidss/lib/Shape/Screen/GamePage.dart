@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:iqidss/Shape/Screen/ScoreBoard.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -20,7 +21,12 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
       if (mockData.lastQuestion() == true) {
         print('questionfinish');
         Alert(context: context, title: 'Well Done!', buttons: [
-          DialogButton(child: Text(' VIEW YOUR SCORE'), onPressed: () {})
+          DialogButton(child: Text(' VIEW YOUR SCORE'), onPressed: () {
+            Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScoreBoard()));
+          })
         ]).show();
       } else
         mockData.nextQuestion();

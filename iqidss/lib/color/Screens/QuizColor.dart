@@ -145,7 +145,7 @@ with SingleTickerProviderStateMixin{
             value: animation.value,
           ),
 
-          CachedNetworkImage(imageUrl: _questions[index].getImageUrl(),),
+          CachedNetworkImage(imageUrl: _questions[index].getImageUrl(), height: 250,),
 
           Spacer(),
 

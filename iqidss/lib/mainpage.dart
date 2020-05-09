@@ -101,8 +101,8 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VegetablePage()),
-                  );
+                    MaterialPageRoute(builder: (context) => VegetablePage(widget.name),
+                  ));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),

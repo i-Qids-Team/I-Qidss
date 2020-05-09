@@ -6,6 +6,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 VegetableData questData = new VegetableData();
 
 class VegetableScreen extends StatefulWidget {
+  final String _name;
+  VegetableScreen(this._name);
 
   @override
   _VegetableScreenState createState() => _VegetableScreenState();
@@ -22,7 +24,7 @@ class _VegetableScreenState extends State<VegetableScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 0.0),
-          child: VegetableScreenPage(),
+          child: VegetableScreenPage(widget._name)
         ),
       ),
     );
@@ -30,13 +32,14 @@ class _VegetableScreenState extends State<VegetableScreen> {
 }
 
 class VegetableScreenPage extends StatefulWidget {
+  final String _name;
+  VegetableScreenPage(this._name);
 
   @override
   _VegetableScreenPageState createState() => _VegetableScreenPageState();
 }
 
 class _VegetableScreenPageState extends State<VegetableScreenPage> {
-
   int totalCorrect = 0;
   int totalQuestion = 0;
   int indexAnsw = 0;
@@ -45,11 +48,10 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
   void checkAnswer(value) {
     if (questData.getAnswer() == value) {
       print('Correct');
-      
+
       totalCorrect = totalCorrect + 1;
     } else {
       print('Wrong');
-     
     }
 
     // questData.printQuestionLength();
@@ -64,9 +66,7 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
     if (questData.questFinish() == true) {
       print('Question is Finish');
       int totalScore = totalCorrect;
-      Alert(
-          context: context,
-          title: 'The Game is Over',
+      Alert(context: context, title: 'The Game is Over',
           // desc: 'Right $totalCorrect out of $totalQuestion',
           buttons: [
             DialogButton(
@@ -79,12 +79,13 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                                 score: totalScore,
                                 totalQuestion: questData.printQuestionLength(),
                                 compliments: compliments,
+                                name: widget._name,
                               )));
                 })
           ]).show();
 
       questData.questReset(); //to reset question
-      
+
       totalCorrect = 0;
       totalQuestion = 0;
 
@@ -193,7 +194,6 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                       borderRadius: new BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.red[100], width: 5.0),
                     ),
-                    
                     color: Colors.red[50],
                     child: Text(
                       // 'False',

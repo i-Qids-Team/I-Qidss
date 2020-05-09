@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'vegetable_screen.dart';
+
 class VegetablePage extends StatefulWidget {
-  const VegetablePage({Key key}) : super(key: key);
+
+  final String _name;
+  VegetablePage(this._name);
 
   @override
   _VegetablePageState createState() => _VegetablePageState();
@@ -38,7 +42,8 @@ class _VegetablePageState extends State<VegetablePage> {
                 child: Text("Lets",
                     style: TextStyle(fontSize: 25, letterSpacing: 3)),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/vegetable_screen');
+                  // Navigator.pushNamed(context, '/vegetable_screen');
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new VegetableScreen(widget._name)));
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

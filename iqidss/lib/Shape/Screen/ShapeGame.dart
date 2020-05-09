@@ -24,6 +24,12 @@ class _ShapeGame extends State<ShapeGame> {
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/shapebg.gif"),
+            fit: BoxFit.fill,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -43,7 +49,7 @@ class _ShapeGame extends State<ShapeGame> {
                 color: Colors.pink[300],
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
-                child: Text("Play Now", style: TextStyle(fontSize: 25)),
+                child: Text("Play Now", style: TextStyle(fontSize: 25, letterSpacing: 3)),
                 onPressed: () {
                   Navigator.push(
                     context,

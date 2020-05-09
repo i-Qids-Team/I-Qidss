@@ -69,6 +69,7 @@ flutter:
     - assets/cylinder.png
     - assets/circle.png
     - assets/triangle.png
+    - assets/shapebg.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

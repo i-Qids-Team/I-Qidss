@@ -5,10 +5,10 @@ class MockData{
   int _questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question('assets/square.png','Square have 4 edges ?', true),
-    Question('assets/circle.png','Circle have 10 edges ?', false),
-    Question('assets/triangle.png','Triangle is a pizza.', true),
-    Question('assets/cylinder.png','Cylinder is circle.', false),
+    Question('assets/square.png','1/4 Square have 4 edges ?', true),
+    Question('assets/circle.png','2/4 Circle have 10 edges ?', false),
+    Question('assets/triangle.png','3/4 Triangle is a pizza.', true),
+    Question('assets/cylinder.png','4/4 Cylinder is circle.', false),
   ];
 
   void nextQuestion(){

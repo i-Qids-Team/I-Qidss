@@ -42,7 +42,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name', play Shape!'),
+        title: Text(widget.name + ', play Shape!'),
           backgroundColor: Colors.red[300],
           actions: <Widget>[
             IconButton(

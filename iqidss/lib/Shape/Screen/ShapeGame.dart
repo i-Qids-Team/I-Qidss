@@ -4,6 +4,9 @@ import 'package:iqidss/shape/Screen/GamePage.dart';
 
 
 class ShapeGame extends StatefulWidget {
+  final String name;
+  ShapeGame(this.name);
+  
   @override
   _ShapeGame createState() => _ShapeGame();
 }
@@ -44,7 +47,7 @@ class _ShapeGame extends State<ShapeGame> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => GamePage()),
+                    MaterialPageRoute(builder: (context) => GamePage(widget.name)),
                   );
                 },
                 shape: RoundedRectangleBorder(

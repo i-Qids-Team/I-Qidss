@@ -7,10 +7,8 @@ import 'package:iqidss/vegetable/screen/vegetable_home.dart';
 import 'package:iqidss/shape/Screen/ShapeGame.dart';
 
 class MainPage extends StatefulWidget {
- final String name;
+  final String name;
   MainPage(this.name);
-
-
   @override
   _MainPageState createState() => _MainPageState(name);
 }
@@ -52,11 +50,11 @@ class _MainPageState extends State<MainPage> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Shape", style: TextStyle(fontSize: 25)),
-                onPressed: (){
-                  Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ShapeGame()),
-                  );
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacement(MaterialPageRoute(builder: (_) {
+                    return ShapeGame(widget.name);
+                  }));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
@@ -72,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Animal", style: TextStyle(fontSize: 25)),
                 onPressed: () {
-                   Navigator.of(context)
+                  Navigator.of(context)
                       .pushReplacement(MaterialPageRoute(builder: (_) {
                     return AnimalSplashScreen(widget.name);
                   }));
@@ -342,7 +340,8 @@ class __DrawerState extends State<_Drawer> {
                         onTap: () {
                           return Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LogoutPage()),
+                            MaterialPageRoute(
+                                builder: (context) => LogoutPage()),
                           );
                         },
                       ),
@@ -479,4 +478,3 @@ class __DrawerState extends State<_Drawer> {
         });
   }
 }
-

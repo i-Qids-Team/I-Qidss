@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/Shape/Screen/ScoreBoard.dart';
+import 'package:iqidss/mainpage.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-// import 'package:iqidss/shape/Question.dart';
 
 class GamePage extends StatefulWidget {
+  final String name;
+  GamePage(this.name);
   @override
   _GamePage createState() => _GamePage();
 }
@@ -28,7 +30,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ScoreBoard(scorepass)));
+                        builder: (context) => ScoreBoard(scorepass,widget.name)));
               })
         ]).show();
       } else
@@ -40,9 +42,21 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Corona, play Shape!'),
+        title: Text('Corona, play Shape!'),
           backgroundColor: Colors.red[300],
-          ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainPage(widget.name)
+                        )
+                        );
+                })
+          ]
+      ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
         height: double.infinity,

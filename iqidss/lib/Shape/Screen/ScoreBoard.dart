@@ -4,8 +4,8 @@ import 'package:iqidss/shape/Screen/GamePage.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int finalscore;
-
-  ScoreBoard(this.finalscore);
+  final String name;
+  ScoreBoard(this.finalscore, this.name);
 
   @override
   _ScoreBoard createState() => _ScoreBoard();
@@ -19,6 +19,18 @@ class _ScoreBoard extends State<ScoreBoard> {
         appBar: AppBar(
           title: Text('Score'),
           backgroundColor: Colors.red[300],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+               Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (_) {
+                return MainPage(widget.name);
+              }));
+              }
+            ),
+          ],
+          automaticallyImplyLeading: false,
         ),
         body: Container(
             padding: const EdgeInsets.all(65.0),
@@ -70,7 +82,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => GamePage()),
+                      MaterialPageRoute(builder: (context) => GamePage(widget.name)),
                     );
                   },
                   shape: RoundedRectangleBorder(

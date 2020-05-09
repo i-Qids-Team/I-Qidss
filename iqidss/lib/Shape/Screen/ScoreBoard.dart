@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:iqidss/mainpage.dart';
 import 'package:iqidss/shape/Screen/GamePage.dart';
 
 class ScoreBoard extends StatefulWidget {
+  final int finalscore;
+
+  ScoreBoard(this.finalscore);
+
   @override
   _ScoreBoard createState() => _ScoreBoard();
 }
 
 class _ScoreBoard extends State<ScoreBoard> {
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red[100],
@@ -43,6 +49,11 @@ class _ScoreBoard extends State<ScoreBoard> {
               SizedBox(height: 10.0),
               SizedBox(height: 10.0),
               Text("Your Score:",
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+              Text(widget.finalscore.toString(),
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,

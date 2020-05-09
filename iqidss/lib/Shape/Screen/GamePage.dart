@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iqidss/Shape/Screen/ScoreBoard.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+// import 'package:iqidss/shape/Question.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -20,13 +20,16 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
 
       if (mockData.lastQuestion() == true) {
         print('questionfinish');
+        int scorepass = score;
         Alert(context: context, title: 'Well Done!', buttons: [
-          DialogButton(child: Text(' VIEW YOUR SCORE'), onPressed: () {
-            Navigator.pushReplacement(
+          DialogButton(
+              child: Text(' VIEW YOUR SCORE'),
+              onPressed: () {
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ScoreBoard()));
-          })
+                        builder: (context) => ScoreBoard(scorepass)));
+              })
         ]).show();
       } else
         mockData.nextQuestion();
@@ -39,7 +42,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
       appBar: AppBar(
           title: Text('Corona, play Shape!'),
           backgroundColor: Colors.red[300],
-          actions: <Widget>[]),
+          ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
         height: double.infinity,

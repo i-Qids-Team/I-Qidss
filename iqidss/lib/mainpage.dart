@@ -6,6 +6,8 @@ import 'package:iqidss/color/Screens/HomeColor.dart';
 import 'package:iqidss/vegetable/screen/vegetable_home.dart';
 import 'package:iqidss/shape/Screen/ShapeGame.dart';
 
+import 'animal/screen/animalsplashscreen.dart';
+
 class MainPage extends StatefulWidget {
   final String name;
   MainPage(this.name);
@@ -70,7 +72,10 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Animal", style: TextStyle(fontSize: 25)),
                 onPressed: () {
-                  
+                  Navigator.of(context)
+                      .pushReplacement(MaterialPageRoute(builder: (_) {
+                    return AnimalSplashScreen(widget.name);
+                  }));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),

@@ -105,7 +105,7 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
     var column = Column(
       children: <Widget>[
         Container(height: 20),
-        Image.asset(widget.list[widget.index].image, height: 250),
+        Image.asset(widget.list[widget.index].image, height: 200),
         Container(height: 20),
         Text(widget.list[widget.index].name,
             style: TextStyle(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/animal/model/animal.dart';
 import 'package:iqidss/mainpage.dart';
-
 import 'animalquiz.dart';
 
 class AnimalGuide extends StatefulWidget {

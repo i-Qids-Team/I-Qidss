@@ -37,13 +37,14 @@ class _AnimalQuizState extends State<AnimalQuiz> {
     return widget.totalScore + 1;
   }
 
+
   animalAudio() {
     player.play(widget.list[widget.index].audio);
   }
 
   startAnimalScreen() async {
     Timer.periodic(Duration(seconds: 1), (t) {
-      if (time < 1) {
+      if (time == 0) {
         t.cancel();
         // AnswerAnimal({this.image, this.animal, this.status, this.color, this.audio});
         if (scores == widget.list[widget.index].animalalpha.length) {
@@ -62,7 +63,7 @@ class _AnimalQuizState extends State<AnimalQuiz> {
             MaterialPageRoute(builder: (_) {
               return AnswerAnimal(
                   index: widget.index,
-                  scores: _totalScores(),
+                  scores: widget.totalScore,
                   status: false,
                   list: widget.list,
                   name: widget.name);
@@ -82,6 +83,10 @@ class _AnimalQuizState extends State<AnimalQuiz> {
           }),
         );
       }
+      else if(time == -1)
+      {
+        t.cancel();
+      }
       setState(() {
         time = time - 1;
       });
@@ -100,10 +105,15 @@ class _AnimalQuizState extends State<AnimalQuiz> {
             content: new Text('Are you sure to quit the game?'),
             actions: <Widget>[
               new FlatButton(
-                  onPressed: () => Navigator.of(context)
+              
+                  onPressed: () 
+                  {
+                    time = -1;
+                    Navigator.of(context)
                           .pushReplacement(MaterialPageRoute(builder: (_) {
                         return MainPage(widget.name);
-                      })),
+                      }));
+                  },
                   child: new Text('Yes',style: TextStyle(
                           fontSize: 30,
                           color: Colors.red,
@@ -165,11 +175,11 @@ class _AnimalQuizState extends State<AnimalQuiz> {
               ),
             ),
             Container(height: 20),
-            Image.asset(widget.list[widget.index].imagehide, height: 250),
+            Image.asset(widget.list[widget.index].imagehide, height: 200),
             Container(height: 20),
             GestureDetector(
               onTap: () => player.play(widget.list[widget.index].audio),
-              child: Image.asset('assets/animalasset/clickme.png', height: 80),
+              child: Image.asset('assets/animalasset/clickme.png', height: 70),
             ),
             Container(height: 20),
             Row(

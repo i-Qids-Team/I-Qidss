@@ -18,7 +18,7 @@ class _ShapeGame extends State<ShapeGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name + ', play Shape!'),
+        title: Text('Corona , play Shape!'),
         backgroundColor: Colors.red[300],
       ),
       body: Container(

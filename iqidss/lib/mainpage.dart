@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
-import 'package:iqidss/animal/screen/animalsplashscreen.dart';
+import 'package:iqidss/color/Screens/HomeColor.dart';
 import 'package:iqidss/vegetable/screen/vegetable_home.dart';
 import 'package:iqidss/shape/Screen/ShapeGame.dart';
+
+import 'animal/screen/animalsplashscreen.dart';
 
 class MainPage extends StatefulWidget {
   final String name;
@@ -88,7 +90,7 @@ class _MainPageState extends State<MainPage> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Color", style: TextStyle(fontSize: 25)),
-                onPressed: () {},
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeColor(widget.name))),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),

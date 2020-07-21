@@ -3,6 +3,7 @@ import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 import 'package:iqidss/color/Screens/HomeColor.dart';
+import 'package:iqidss/scoreboard.dart';
 import 'package:iqidss/vegetable/screen/vegetable_home.dart';
 import 'package:iqidss/shape/Screen/ShapeGame.dart';
 
@@ -18,6 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   String value;
   _MainPageState(this.value);
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +109,8 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VegetablePage()),
-                  );
+                    MaterialPageRoute(builder: (context) => VegetablePage(widget.name),
+                  ));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
@@ -117,8 +119,35 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.red[300],
+        selectedItemColor: Colors.yellow,
+        unselectedItemColor: Colors.black87,
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.apps),
+            title: Text('Game'),
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.score),
+            title: Text('Score'),
+          ),
+        ],
+      ),
     );
   }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+      if(_currentIndex == 1){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScoreBoard()));
+      }
+    });
+  }
+  
 }
 
 class ListTitle extends StatelessWidget {

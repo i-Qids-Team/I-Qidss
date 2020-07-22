@@ -35,15 +35,15 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(20.0),
                 child: Image.asset(
                   "assets/logo.gif",
-                  height: 200.0,
-                  width: 250.0,
+                  height: 180.0,
+                  width: 230.0,
                 ),
               ),
               Stack(
                 children: <Widget>[
                   SingleChildScrollView(
                     child: Container(
-                        height: 280.0,
+                        height: 300.0,
                         width: 380.0,
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.0, vertical: 20.0),
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: 5.0,
+                                  vertical: 3.0,
                                 ),
                                 child: TextFormField(
                                   validator: (input) => input.isEmpty
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               new Padding(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: 5.0,
+                                  vertical: 3.0,
                                 ),
                                 child: TextFormField(
                                   validator: (input) => input.isEmpty
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 splashColor: Colors.red[800],
                                 color: Colors.red,
                                 padding: EdgeInsets.symmetric(
-                                  vertical: 5.0,
+                                  vertical: 3.0,
                                 ),
                                 child: Text(
                                   "Sign In",
@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                                 splashColor: Colors.red[800],
                                 color: Colors.red,
                                 padding: EdgeInsets.symmetric(
-                                  vertical: 5.0,
+                                  vertical: 3.0,
                                 ),
                                 child: Text(
                                   "Create Account",

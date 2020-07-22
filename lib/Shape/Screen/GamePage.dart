@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/Shape/Screen/ScoreBoard.dart';
 import 'package:iqidss/mainpage.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'ScoreBoard.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('play Shape!'),
+          title: Text('Lets play Shape!'),
           backgroundColor: Colors.red[300],
           actions: <Widget>[
             IconButton(

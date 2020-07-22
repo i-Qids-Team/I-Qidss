@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
-import 'package:iqidss/shape/Screen/GamePage.dart';
 
+import 'GamePage.dart';
 
 class ShapeGame extends StatefulWidget {
-  final String name;
-  ShapeGame(this.name);
-  
   @override
   _ShapeGame createState() => _ShapeGame();
 }
@@ -18,7 +15,7 @@ class _ShapeGame extends State<ShapeGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.name}, play Shape!'),
+        title: Text('Lets play Shape!'),
         backgroundColor: Colors.red[300],
       ),
       body: Container(
@@ -49,11 +46,12 @@ class _ShapeGame extends State<ShapeGame> {
                 color: Colors.pink[300],
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
-                child: Text("Play Now", style: TextStyle(fontSize: 25, letterSpacing: 3)),
+                child: Text("Play Now",
+                    style: TextStyle(fontSize: 25, letterSpacing: 3)),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => GamePage(widget.name)),
+                    new MaterialPageRoute(builder: (context) => new GamePage()),
                   );
                 },
                 shape: RoundedRectangleBorder(

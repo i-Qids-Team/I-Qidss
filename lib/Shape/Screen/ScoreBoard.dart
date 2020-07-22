@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/mainpage.dart';
-import 'package:iqidss/shape/Screen/GamePage.dart';
+
+import 'GamePage.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int finalscore;
-  final String name;
-  ScoreBoard(this.finalscore, this.name);
+  ScoreBoard(this.finalscore);
 
   @override
   _ScoreBoard createState() => _ScoreBoard();
@@ -77,8 +77,8 @@ class _ScoreBoard extends State<ScoreBoard> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => GamePage(widget.name)),
+                      new MaterialPageRoute(
+                          builder: (context) => new GamePage()),
                     );
                   },
                   shape: RoundedRectangleBorder(

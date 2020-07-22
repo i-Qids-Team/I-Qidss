@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'animalguide.dart';
 
 class AnimalSplashScreen extends StatefulWidget {
-  final String name;
-  AnimalSplashScreen(this.name);
-
   @override
   _AnimalSplashScreenState createState() => _AnimalSplashScreenState();
 }

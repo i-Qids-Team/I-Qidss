@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iqidss/signup.dart';
 import 'mainpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,14 +10,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String value;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _email, _password, _error;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
       resizeToAvoidBottomPadding: false,
       body: Stack(
         fit: StackFit.expand,
@@ -26,11 +30,12 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              showAlert(),
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Image.asset(
                   "assets/logo.gif",
-                  height: 250.0,
+                  height: 200.0,
                   width: 250.0,
                 ),
               ),
@@ -38,93 +43,98 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   SingleChildScrollView(
                     child: Container(
-                      height: 230.0,
-                      width: 380.0,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.yellow[50],
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                            ),
-                            child: TextField(
-                              controller: usernameController,
-                              autocorrect: false,
-                              autofocus: false,
-                              onChanged: (text) {
-                                value = text;
-                              },
-                              style: TextStyle(
-                                fontSize: 18.0,
+                        height: 280.0,
+                        width: 380.0,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[50],
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                ),
+                                child: TextFormField(
+                                  validator: (input) => input.isEmpty
+                                      ? 'Email cannot be blank'
+                                      : null,
+                                  onSaved: (input) => _email = input,
+                                  decoration: InputDecoration(
+                                    hintText: "Email",
+                                    border: InputBorder.none,
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    contentPadding: EdgeInsets.all(10),
+                                  ),
+                                ),
                               ),
-                              decoration: InputDecoration(
-                                hintText: "Username",
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                contentPadding: EdgeInsets.all(10),
+                              new Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                ),
+                                child: TextFormField(
+                                  validator: (input) => input.isEmpty
+                                      ? 'Please insert your password'
+                                      : null,
+                                  onSaved: (input) => _password = input,
+                                  decoration: InputDecoration(
+                                    hintText: "Password",
+                                    border: InputBorder.none,
+                                    filled: true,
+                                    fillColor: Colors.grey[300],
+                                    contentPadding: EdgeInsets.all(10),
+                                  ),
+                                  obscureText: true,
+                                ),
                               ),
-                            ),
-                          ),
-                          new Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                            ),
-                            child: TextField(
-                              controller: passwordController,
-                              autocorrect: false,
-                              autofocus: false,
-                              obscureText: true,
-                              style: TextStyle(
-                                fontSize: 18.0,
+                              MaterialButton(
+                                onPressed: login,
+                                minWidth: 250.0,
+                                splashColor: Colors.red[800],
+                                color: Colors.red,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                ),
+                                child: Text(
+                                  "Sign In",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                contentPadding: EdgeInsets.all(10.0),
-                              ),
-                            ),
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              if ((usernameController != null &&
-                                      usernameController.text == "aliah") &&
-                                  (passwordController != null &&
-                                      passwordController.text == "123")) {
-                                Navigator.push(
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MainPage(value)));
-                              } else {
-                                _showAlertDialog();
-                              }
-                            },
-                            minWidth: 250.0,
-                            splashColor: Colors.red[800],
-                            color: Colors.red,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                            ),
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                color: Colors.white,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new SignUpPage()),
+                                  );
+                                },
+                                minWidth: 250.0,
+                                splashColor: Colors.red[800],
+                                color: Colors.red,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                ),
+                                child: Text(
+                                  "Create Account",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        )),
                   ),
                 ],
               ),
@@ -135,20 +145,61 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _showAlertDialog() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text('ALERT!'),
-            content: new Text('Please enter your username and password'),
-            actions: <Widget>[
-              new FlatButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: new Text('try Again?'))
-            ],
-          );
+  Widget showAlert() {
+    if (_error != null) {
+      return Container(
+        color: Colors.amberAccent,
+        width: double.infinity,
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.error_outline),
+            ),
+            Expanded(
+              child: AutoSizeText(
+                _error,
+                maxLines: 3,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    _error = null;
+                  });
+                },
+              ),
+            )
+          ],
+        ),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
+  }
+
+  Future<void> login() async {
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
+      formState.save();
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance
+                .signInWithEmailAndPassword(email: _email, password: _password))
+            .user;
+
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MainPage(user: user)));
+      } catch (e) {
+        print(e);
+        setState(() {
+          _error = e.message;
         });
+      }
+    }
   }
 }

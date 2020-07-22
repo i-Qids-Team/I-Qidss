@@ -21,7 +21,7 @@ class _AnimalSplashScreenState extends State<AnimalSplashScreen> {
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return AnimalGuide(widget.name);
+          return AnimalGuide();
         }),
       );
     });

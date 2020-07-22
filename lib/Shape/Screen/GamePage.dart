@@ -5,8 +5,6 @@ import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class GamePage extends StatefulWidget {
-  final String name;
-  GamePage(this.name);
   @override
   _GamePage createState() => _GamePage();
 }
@@ -22,7 +20,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
 
       if (mockData.lastQuestion() == true) {
         print('questionfinish');
-        int scorepass = score;
+        int scorepass = 0;
         Alert(context: context, title: 'Well Done!', buttons: [
           DialogButton(
               child: Text(' VIEW YOUR SCORE'),
@@ -30,7 +28,7 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ScoreBoard(scorepass,widget.name)));
+                        builder: (context) => ScoreBoard(scorepass)));
               })
         ]).show();
       } else
@@ -42,21 +40,16 @@ class _GamePage extends State<GamePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( widget.name + ', play Shape!'),      
+          title: Text('play Shape!'),
           backgroundColor: Colors.red[300],
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainPage(widget.name)
-                        )
-                        );
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => MainPage()));
                 })
-          ]
-      ),
+          ]),
       body: Container(
         padding: const EdgeInsets.all(10.0),
         height: double.infinity,

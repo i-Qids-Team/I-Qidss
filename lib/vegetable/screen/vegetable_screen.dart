@@ -6,9 +6,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 VegetableData questData = new VegetableData();
 
 class VegetableScreen extends StatefulWidget {
-  final String _name;
-  VegetableScreen(this._name);
-
   @override
   _VegetableScreenState createState() => _VegetableScreenState();
 }
@@ -24,7 +21,6 @@ class _VegetableScreenState extends State<VegetableScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 0.0),
-          child: VegetableScreenPage(widget._name)
         ),
       ),
     );
@@ -79,7 +75,6 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                                 score: totalScore,
                                 totalQuestion: questData.printQuestionLength(),
                                 compliments: compliments,
-                                name: widget._name,
                               )));
                 })
           ]).show();

@@ -5,10 +5,9 @@ import '../../mainpage.dart';
 class VegetableScore extends StatefulWidget {
   final int score, totalQuestion, index;
   final String compliments;
-  final String name;
 
   VegetableScore(
-      {this.score, this.totalQuestion, this.index, this.compliments, this.name});
+      {this.score, this.totalQuestion, this.index, this.compliments});
 
   @override
   _VegetableScoreState createState() => _VegetableScoreState();
@@ -25,7 +24,8 @@ class _VegetableScoreState extends State<VegetableScore> {
           IconButton(
             icon: Icon(Icons.close, size: 30.0),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage(widget.name)));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MainPage()));
             },
           ),
         ],

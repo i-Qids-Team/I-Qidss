@@ -4,8 +4,7 @@ import 'animalguide.dart';
 
 class AnimalScore extends StatefulWidget {
   final int score;
-  final String name;
-  AnimalScore({this.score, this.name});
+  AnimalScore({this.score});
   @override
   _AnimalScoreState createState() => _AnimalScoreState();
 }
@@ -49,7 +48,7 @@ class _AnimalScoreState extends State<AnimalScore> {
             onPressed: () {
               Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(builder: (_) {
-                return MainPage(widget.name);
+                return MainPage();
               }));
             },
           ),
@@ -90,7 +89,7 @@ class _AnimalScoreState extends State<AnimalScore> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AnimalGuide(widget.name),
+                    builder: (context) => AnimalGuide(),
                   ));
             },
             child: Container(

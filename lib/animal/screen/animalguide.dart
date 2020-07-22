@@ -4,9 +4,6 @@ import 'package:iqidss/mainpage.dart';
 import 'animalquiz.dart';
 
 class AnimalGuide extends StatefulWidget {
-  final String name;
-  AnimalGuide(this.name);
-
   @override
   _AnimalGuideState createState() => _AnimalGuideState();
 }
@@ -47,8 +44,7 @@ class _AnimalGuideState extends State<AnimalGuide> {
                   return Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            AnimalQuiz(0, 0, animal, widget.name)),
+                        builder: (context) => AnimalQuiz(0, 0, animal)),
                   );
                 },
                 shape: RoundedRectangleBorder(
@@ -72,7 +68,7 @@ class _AnimalGuideState extends State<AnimalGuide> {
           onPressed: () {
             Navigator.of(context)
                 .pushReplacement(MaterialPageRoute(builder: (_) {
-              return MainPage(widget.name);
+              return MainPage();
             }));
           },
         ),

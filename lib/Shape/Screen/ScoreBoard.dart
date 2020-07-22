@@ -24,7 +24,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                 onPressed: () {
                   Navigator.of(context)
                       .pushReplacement(MaterialPageRoute(builder: (_) {
-                    return MainPage(widget.name);
+                    return MainPage();
                   }));
                 }),
           ],

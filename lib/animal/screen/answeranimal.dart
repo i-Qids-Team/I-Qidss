@@ -11,10 +11,9 @@ class AnswerAnimal extends StatefulWidget {
   final int index;
   final int scores;
   final bool status;
-  final String name;
   final List<AnimalData> list;
 
-  AnswerAnimal({this.index, this.scores, this.status, this.list, this.name});
+  AnswerAnimal({this.index, this.scores, this.status, this.list});
   @override
   _AnswerAnimalState createState() => _AnswerAnimalState();
 }
@@ -81,7 +80,7 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
               new FlatButton(
                   onPressed: () => Navigator.of(context)
                           .pushReplacement(MaterialPageRoute(builder: (_) {
-                        return MainPage(widget.name);
+                        return MainPage();
                       })),
                   child: new Text('Yes',
                       style: TextStyle(
@@ -89,7 +88,9 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
                           color: Colors.red,
                           fontWeight: FontWeight.bold))),
               new FlatButton(
-                  onPressed: () { Navigator.pop(context); },
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: new Text('No',
                       style: TextStyle(
                           fontSize: 30,
@@ -138,15 +139,15 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
               if (widget.index == animal.length - 1) {
                 return Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (_) {
-                    return AnimalScore(score: widget.scores, name: widget.name);
+                    return AnimalScore(score: widget.scores);
                   }),
                 );
               }
               return Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AnimalQuiz(widget.index + 1,
-                        widget.scores, widget.list, widget.name)),
+                    builder: (context) => AnimalQuiz(
+                        widget.index + 1, widget.scores, widget.list)),
               );
             },
             shape: RoundedRectangleBorder(

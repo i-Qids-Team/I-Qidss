@@ -1,31 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iqidss/UserProfile.dart';
 import 'package:iqidss/NotificationBar.dart';
 import 'package:iqidss/Logout.dart';
 import 'package:iqidss/color/Screens/HomeColor.dart';
 import 'package:iqidss/scoreboard.dart';
-import 'package:iqidss/vegetable/screen/vegetable_home.dart';
-import 'package:iqidss/shape/Screen/ShapeGame.dart';
 
+import 'Shape/Screen/ShapeGame.dart';
 import 'animal/screen/animalsplashscreen.dart';
+import 'vegetable/screen/vegetable_home.dart';
 
 class MainPage extends StatefulWidget {
-  final String name;
-  MainPage(this.name);
+  const MainPage({Key key, this.user}) : super(key: key);
+  final FirebaseUser user;
+
   @override
-  _MainPageState createState() => _MainPageState(name);
+  _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  String value;
-  _MainPageState(this.value);
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome ' + value + "!"),
+        title: Text('Welcome Kids!'),
         backgroundColor: Colors.red[300],
       ),
       drawer: _Drawer(),
@@ -55,10 +55,11 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Shape", style: TextStyle(fontSize: 25)),
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (_) {
-                    return ShapeGame(widget.name);
-                  }));
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new ShapeGame()),
+                  );
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
@@ -76,7 +77,7 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   Navigator.of(context)
                       .pushReplacement(MaterialPageRoute(builder: (_) {
-                    return AnimalSplashScreen(widget.name);
+                    return AnimalSplashScreen();
                   }));
                 },
                 shape: RoundedRectangleBorder(
@@ -92,7 +93,8 @@ class _MainPageState extends State<MainPage> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(15.0),
                 child: Text("Color", style: TextStyle(fontSize: 25)),
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeColor(widget.name))),
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeColor())),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
               ),
@@ -109,8 +111,9 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VegetablePage(widget.name),
-                  ));
+                    new MaterialPageRoute(
+                        builder: (context) => new VegetablePage()),
+                  );
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
@@ -142,12 +145,12 @@ class _MainPageState extends State<MainPage> {
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      if(_currentIndex == 1){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScoreBoard()));
+      if (_currentIndex == 1) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ScoreBoard()));
       }
     });
   }
-  
 }
 
 class ListTitle extends StatelessWidget {

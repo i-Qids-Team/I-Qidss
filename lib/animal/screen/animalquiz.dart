@@ -12,9 +12,8 @@ class AnimalQuiz extends StatefulWidget {
   final int index;
   final int totalScore;
   final List<AnimalData> list;
-  final String name;
 
-  AnimalQuiz(this.index, this.totalScore, this.list, this.name);
+  AnimalQuiz(this.index, this.totalScore, this.list);
   @override
   _AnimalQuizState createState() => _AnimalQuizState();
 }
@@ -37,7 +36,6 @@ class _AnimalQuizState extends State<AnimalQuiz> {
     return widget.totalScore + 1;
   }
 
-
   animalAudio() {
     player.play(widget.list[widget.index].audio);
   }
@@ -54,8 +52,7 @@ class _AnimalQuizState extends State<AnimalQuiz> {
                   index: widget.index,
                   scores: _totalScores(),
                   status: true,
-                  list: widget.list,
-                  name: widget.name);
+                  list: widget.list);
             }),
           );
         } else {
@@ -65,8 +62,7 @@ class _AnimalQuizState extends State<AnimalQuiz> {
                   index: widget.index,
                   scores: widget.totalScore,
                   status: false,
-                  list: widget.list,
-                  name: widget.name);
+                  list: widget.list);
             }),
           );
         }
@@ -78,13 +74,10 @@ class _AnimalQuizState extends State<AnimalQuiz> {
                 index: widget.index,
                 scores: _totalScores(),
                 status: true,
-                list: widget.list,
-                name: widget.name);
+                list: widget.list);
           }),
         );
-      }
-      else if(time == -1)
-      {
+      } else if (time == -1) {
         t.cancel();
       }
       setState(() {
@@ -99,26 +92,29 @@ class _AnimalQuizState extends State<AnimalQuiz> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: new Text('ALERT!',style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black)),
+            title: new Text('ALERT!',
+                style: TextStyle(fontSize: 30, color: Colors.black)),
             content: new Text('Are you sure to quit the game?'),
             actions: <Widget>[
               new FlatButton(
-              
-                  onPressed: () 
-                  {
+                  onPressed: () {
                     time = -1;
                     Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (_) {
-                        return MainPage(widget.name);
-                      }));
+                        .pushReplacement(MaterialPageRoute(builder: (_) {
+                      return MainPage();
+                    }));
                   },
-                  child: new Text('Yes',style: TextStyle(
+                  child: new Text('Yes',
+                      style: TextStyle(
                           fontSize: 30,
                           color: Colors.red,
                           fontWeight: FontWeight.bold))),
-              new FlatButton(onPressed: () {  Navigator.pop(context); }, child: new Text('No',style: TextStyle(
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text('No',
+                      style: TextStyle(
                           fontSize: 30,
                           color: Colors.green,
                           fontWeight: FontWeight.bold)))

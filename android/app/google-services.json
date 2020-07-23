@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "625501550836",
+    "firebase_url": "https://i-qids.firebaseio.com",
+    "project_id": "i-qids",
+    "storage_bucket": "i-qids.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625501550836:android:05001306982d24418486a1",
+        "android_client_info": {
+          "package_name": "com.example.iqidss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625501550836-0ng50sh3ff23p3trp2ccfe483dloquba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPtjrCA52QnnTD1bLEKCwTHqiHuE6qRxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625501550836-0ng50sh3ff23p3trp2ccfe483dloquba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

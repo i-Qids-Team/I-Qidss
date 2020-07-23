@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:iqidss/SplashScreen.dart';
-
-import 'animal/screen/animalquiz.dart';
+import 'package:iqidss/SplashScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +11,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.yellow,
         ),
         debugShowCheckedModeBanner: false,
-        // home: SplashScreen());        
-          home:  AnimalQuiz(0, 0));
+        home: SplashScreen());
   }
 }

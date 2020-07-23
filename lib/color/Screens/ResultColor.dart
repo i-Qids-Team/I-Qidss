@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iqidss/mainpage.dart';
 import 'package:iqidss/color/Screens/HomeColor.dart';
 
+import '../../score_models/score.dart';
+import '../../score_services/score_data_service.dart';
+
 class ResultColor extends StatefulWidget {
   final int score, totalQuestion, correct, incorrect, notattempted;
   ResultColor(
@@ -17,24 +20,57 @@ class ResultColor extends StatefulWidget {
 
 class _ResultColorState extends State<ResultColor> {
   String greeting = "";
+
+  List<Score> scores = new List<Score>();
+  final dataService = ScoreDataService();
+  Future<List<Score>> _futureData;
+
   @override
   void initState() {
     super.initState();
-
-    var percentage = (widget.score / (widget.totalQuestion)) * 100;
-    if (percentage >= 90) {
-      greeting = "Outstanding";
-    } else if (percentage > 80 && percentage < 90) {
-      greeting = "Good Work";
-    } else if (percentage > 70 && percentage < 80) {
-      greeting = "Good Effort";
-    } else if (percentage < 70) {
-      greeting = "Needs improvement";
-    }
+    _futureData = dataService.getScoreList();
   }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Score>>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            scores = snapshot.data;
+
+            scores[1].id = snapshot.data[1].id;
+            scores[1].score = snapshot.data[1].score;
+
+            scores[1].score = widget.score;
+            dataService.updateScore(id: scores[1].id, score: scores[1].score);
+
+            switch (scores[1].score) {
+              case 0:
+              case 1:
+              case 2:
+                greeting = "It's okey, try again.";
+                break;
+              case 3:
+              case 4:
+                greeting = "Good, Keep it up!";
+                break;
+              case 5:
+                greeting = "Very Good! So close.";
+                break;
+              case 6:
+                greeting = "Excellent!";
+                break;
+              default:
+            }
+
+            return _buildMainScreen(context);
+          } else
+            return _buildFetchingDataScreen();
+        });
+  }
+
+  Scaffold _buildMainScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red[100],
       appBar: AppBar(
@@ -100,6 +136,21 @@ class _ResultColorState extends State<ResultColor> {
           ),
         ],
       )),
+    );
+  }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
     );
   }
 }

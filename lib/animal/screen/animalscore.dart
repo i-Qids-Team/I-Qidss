@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iqidss/mainpage.dart';
+import 'package:iqidss/score_models/score.dart';
+import 'package:iqidss/score_services/score_data_service.dart';
 import 'animalguide.dart';
 
 class AnimalScore extends StatefulWidget {
@@ -11,31 +13,57 @@ class AnimalScore extends StatefulWidget {
 
 class _AnimalScoreState extends State<AnimalScore> {
   String mark = "";
+
+  List<Score> scores = new List<Score>();
+  final dataService = ScoreDataService();
+  Future<List<Score>> _futureData;
+
   @override
   void initState() {
     super.initState();
-
-    switch (widget.score) {
-      case 1:
-      case 2:
-        mark = "It's okey, try again.";
-        break;
-      case 3:
-      case 4:
-        mark = "Good, Keep it up!";
-        break;
-      case 5:
-        mark = "Very Good! So close.";
-        break;
-      case 6:
-        mark = "Excellent!";
-        break;
-      default:
-    }
+     _futureData = dataService.getScoreList();
   }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Score>>(
+        future:  _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            scores = snapshot.data;
+
+            scores[0].id = snapshot.data[0].id;
+            scores[0].score = snapshot.data[0].score;
+
+            scores[0].score = widget.score;
+            dataService.updateScore(id: scores[0].id, score: scores[0].score);
+
+            switch (scores[0].score) {
+              case 0:
+              case 1:
+              case 2:
+                mark = "It's okey, try again.";
+                break;
+              case 3:
+              case 4:
+                mark = "Good, Keep it up!";
+                break;
+              case 5:
+                mark = "Very Good! So close.";
+                break;
+              case 6:
+                mark = "Excellent!";
+                break;
+              default:
+            }
+
+            return _buildMainScreen(context);
+          } else
+            return _buildFetchingDataScreen();
+        });
+  }
+
+  Scaffold _buildMainScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red[100],
       appBar: AppBar(
@@ -78,7 +106,7 @@ class _AnimalScoreState extends State<AnimalScore> {
             style: new TextStyle(
                 color: Colors.black, fontWeight: FontWeight.w500, fontSize: 35),
           ),
-          new Text(widget.score.toString() + "/ 6",
+          new Text('${scores[0].score}' + "/ 6",
               style: new TextStyle(
                   color: Colors.black,
                   // fontWeight: FontWeight.w500,
@@ -109,6 +137,21 @@ class _AnimalScoreState extends State<AnimalScore> {
           ),
         ],
       )),
+    );
+  }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
     );
   }
 }

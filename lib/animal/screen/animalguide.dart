@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/animal/model/animal.dart';
 import 'package:iqidss/mainpage.dart';
 import 'animalquiz.dart';
 
@@ -44,7 +43,7 @@ class _AnimalGuideState extends State<AnimalGuide> {
                   return Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AnimalQuiz(0, 0, animal)),
+                        builder: (context) => AnimalQuiz(0, 0)),
                   );
                 },
                 shape: RoundedRectangleBorder(

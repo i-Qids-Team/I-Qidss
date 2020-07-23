@@ -1,0 +1,32 @@
+import 'animaldbdata.dart';
+
+final globalAnimalDBList = <AnimalDBData>[
+  AnimalDBData(
+        name: 'cow', 
+        height: 50
+    ),
+     AnimalDBData(
+        name: 'bird',        
+        height: 50
+    ),
+    AnimalDBData(
+        name: 'lion',  
+        height: 50
+    ),
+      AnimalDBData(
+        name: 'owl', 
+        height: 50
+    ),
+     AnimalDBData(
+        name: 'dog',          
+        height: 50
+    ),
+     AnimalDBData(
+        name: 'cat', 
+        height: 50
+    ),
+
+
+
+];
+

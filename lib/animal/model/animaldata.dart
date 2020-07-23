@@ -1,12 +1,20 @@
-class AnimalData
-{
-  String name;
+class AnimalData {
+  
   String imagehide;
   String image;
   String audio;
-  double height;
   Map animalalpha;
-  
-  AnimalData(this.name,this.imagehide,this.image,this.audio,this.height,this.animalalpha);
-   AnimalData.copy(AnimalData from) : this(from.name, from.imagehide,from.image,from.audio,from.height,from.animalalpha);  
+
+  AnimalData({
+      this.imagehide,
+      this.image,
+      this.audio,
+      this.animalalpha
+      });
+
+  AnimalData.copy(AnimalData from) : this( 
+    imagehide: from.imagehide, 
+    image: from.image, 
+    audio: from.audio,
+    animalalpha: from.animalalpha);
 }

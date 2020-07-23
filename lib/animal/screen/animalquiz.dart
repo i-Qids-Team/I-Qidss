@@ -4,6 +4,9 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iqidss/animal/model/animaldata.dart';
+import 'package:iqidss/animal/model/animaldataglobal.dart';
+import 'package:iqidss/animal/model/animaldbdata.dart';
+import 'package:iqidss/animal/service/animal_data_service.dart';
 import '../../mainpage.dart';
 import 'answeranimal.dart';
 import 'dragobject.dart';
@@ -11,9 +14,7 @@ import 'dragobject.dart';
 class AnimalQuiz extends StatefulWidget {
   final int index;
   final int totalScore;
-  final List<AnimalData> list;
-
-  AnimalQuiz(this.index, this.totalScore, this.list);
+  AnimalQuiz(this.index, this.totalScore);
   @override
   _AnimalQuizState createState() => _AnimalQuizState();
 }
@@ -26,10 +27,35 @@ class _AnimalQuizState extends State<AnimalQuiz> {
   final Map<String, bool> score = {};
   AudioCache player = AudioCache();
 
+  List<AnimalData> animal = globalAnimalsList;
+
+  //firebase
+  List<AnimalDBData> animalDB = new List<AnimalDBData>();
+  final dataService = AnimalDataService();
+  Future<List<AnimalDBData>> _futureData;
+
   void initState() {
     super.initState();
     startAnimalScreen();
     animalAudio();
+    _futureData = dataService.getAnimalList();
+  }
+
+    @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<AnimalDBData>>(
+        future: _futureData,
+        builder: (context, snapshot) {         
+          if (snapshot.hasData) {
+             animalDB = snapshot.data;
+            for (int i = 0; i < snapshot.data.length; i++) {
+              animalDB[i].name = snapshot.data[i].name;
+              animalDB[i].height = snapshot.data[i].height;
+            }
+            return _buildMainScreen();
+          } else
+            return _buildFetchingDataScreen();
+        });
   }
 
   int _totalScores() {
@@ -37,7 +63,7 @@ class _AnimalQuizState extends State<AnimalQuiz> {
   }
 
   animalAudio() {
-    player.play(widget.list[widget.index].audio);
+    player.play(animal[widget.index].audio);
   }
 
   startAnimalScreen() async {
@@ -45,14 +71,13 @@ class _AnimalQuizState extends State<AnimalQuiz> {
       if (time == 0) {
         t.cancel();
         // AnswerAnimal({this.image, this.animal, this.status, this.color, this.audio});
-        if (scores == widget.list[widget.index].animalalpha.length) {
+        if (scores == animal[widget.index].animalalpha.length) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) {
               return AnswerAnimal(
                   index: widget.index,
                   scores: _totalScores(),
-                  status: true,
-                  list: widget.list);
+                  status: true);
             }),
           );
         } else {
@@ -61,20 +86,18 @@ class _AnimalQuizState extends State<AnimalQuiz> {
               return AnswerAnimal(
                   index: widget.index,
                   scores: widget.totalScore,
-                  status: false,
-                  list: widget.list);
+                  status: false);
             }),
           );
         }
-      } else if (scores == widget.list[widget.index].animalalpha.length) {
+      } else if (scores == animal[widget.index].animalalpha.length) {
         t.cancel();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) {
             return AnswerAnimal(
                 index: widget.index,
                 scores: _totalScores(),
-                status: true,
-                list: widget.list);
+                status: true);
           }),
         );
       } else if (time == -1) {
@@ -123,8 +146,7 @@ class _AnimalQuizState extends State<AnimalQuiz> {
         });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Scaffold _buildMainScreen() {
     return Scaffold(
       appBar: AppBar(
         title: Text('Animal'),
@@ -171,27 +193,27 @@ class _AnimalQuizState extends State<AnimalQuiz> {
               ),
             ),
             Container(height: 20),
-            Image.asset(widget.list[widget.index].imagehide, height: 200),
+            Image.asset(animal[widget.index].imagehide, height: 200),
             Container(height: 20),
             GestureDetector(
-              onTap: () => player.play(widget.list[widget.index].audio),
+              onTap: () => player.play(animal[widget.index].audio),
               child: Image.asset('assets/animalasset/clickme.png', height: 70),
             ),
             Container(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: widget.list[widget.index].animalalpha.keys
+              children: animal[widget.index].animalalpha.keys
                   .map((i) => buildDragTarget(i))
                   .toList(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: widget.list[widget.index].animalalpha.keys
+              children: animal[widget.index].animalalpha.keys
                   .map((i) => DragObject(
-                      image: widget.list[widget.index].animalalpha[i],
-                      height: widget.list[widget.index].height,
+                      image: animal[widget.index].animalalpha[i],
+                      height: animalDB[widget.index].height,
                       score: score[i],
                       data: i))
                   .toList()
@@ -207,10 +229,10 @@ class _AnimalQuizState extends State<AnimalQuiz> {
     return DragTarget(
       builder: (context, List<String> data, rejected) {
         return score[i] == true
-            ? Image.asset(widget.list[widget.index].animalalpha[i],
-                height: widget.list[widget.index].height)
+            ? Image.asset(animal[widget.index].animalalpha[i],
+                height: animalDB[widget.index].height)
             : Image.asset('assets/animalasset/box.png',
-                height: widget.list[widget.index].height);
+                height: animalDB[widget.index].height);
       },
       onWillAccept: (data) => data == i,
       onAccept: (data) {
@@ -221,4 +243,21 @@ class _AnimalQuizState extends State<AnimalQuiz> {
       },
     );
   }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
+

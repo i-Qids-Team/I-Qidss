@@ -1,17 +1,6 @@
 
 
-
-// QuoteDataService is a wrapper class implmenting calls for CRUD operations on Quote endpoints.
-//  The class is implemented using the Singleton design pattern.
-
-// TODO: Modify this class accordingly. You want to add all CRUD operations that your app uses.
-// Example: get the list of quotes, get a quote for given id, update the like / dislike
-//     You may want to refer the past project flutter_todo_rest, you can clone from github:
-//         $ git clone https://github.com/jumail-utm/flutter_todo_rest.git
-
-
 import 'package:iqidss/score_models/score.dart';
-
 import 'data_service.dart';
 
 class ScoreDataService {

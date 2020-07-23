@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
-import 'package:iqidss/animal/model/animal.dart';
 import 'package:iqidss/animal/model/animaldata.dart';
+import 'package:iqidss/animal/model/animaldataglobal.dart';
+import 'package:iqidss/animal/model/animaldbdata.dart';
+import 'package:iqidss/animal/service/animal_data_service.dart';
 import '../../mainpage.dart';
 import 'animalquiz.dart';
 import 'animalscore.dart';
@@ -11,20 +13,27 @@ class AnswerAnimal extends StatefulWidget {
   final int index;
   final int scores;
   final bool status;
-  final List<AnimalData> list;
 
-  AnswerAnimal({this.index, this.scores, this.status, this.list});
+  AnswerAnimal({this.index, this.scores, this.status});
   @override
   _AnswerAnimalState createState() => _AnswerAnimalState();
 }
 
 class _AnswerAnimalState extends State<AnswerAnimal> {
   int time = 3;
-
   AudioCache player = AudioCache();
+
+  List<AnimalData> animal = globalAnimalsList;
+
+  //firebase
+  List<AnimalDBData> animalDB = new List<AnimalDBData>();
+  final dataService = AnimalDataService();
+  Future<List<AnimalDBData>> _futureData;
 
   void initState() {
     super.initState();
+
+     _futureData = dataService.getAnimalList();
 
     if (widget.status == true) {
       animalAudio('animalasset/Congrates.mp3');
@@ -33,6 +42,24 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
       animalAudio('animalasset/Timeup.mp3');
       showOverlay(context, 'assets/animalasset/timeup.gif');
     }
+  }
+
+  
+   @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<AnimalDBData>>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          animalDB = snapshot.data;
+          if (snapshot.hasData) {
+            for (int i = 0; i < snapshot.data.length; i++) {
+              animalDB[i].name = snapshot.data[i].name;
+              animalDB[i].height = snapshot.data[i].height;              
+            }
+            return _buildMainScreen(context);
+          } else
+            return _buildFetchingDataScreen();
+        });
   }
 
   showOverlay(BuildContext context, images) {
@@ -101,14 +128,14 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
         });
   }
 
-  @override
-  Widget build(BuildContext context) {
+ 
+  Scaffold _buildMainScreen(BuildContext context) {
     var column = Column(
       children: <Widget>[
         Container(height: 20),
-        Image.asset(widget.list[widget.index].image, height: 200),
+        Image.asset(animal[widget.index].image, height: 200),
         Container(height: 20),
-        Text(widget.list[widget.index].name,
+        Text(animalDB[widget.index].name,
             style: TextStyle(
                 fontSize: 40,
                 color: Colors.white,
@@ -136,7 +163,7 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
             padding: const EdgeInsets.all(15.0),
             child: Text("Next", style: TextStyle(fontSize: 25)),
             onPressed: () {
-              if (widget.index == animal.length - 1) {
+              if (widget.index == animal.length -1) {
                 return Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (_) {
                     return AnimalScore(score: widget.scores);
@@ -147,7 +174,7 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => AnimalQuiz(
-                        widget.index + 1, widget.scores, widget.list)),
+                        widget.index + 1, widget.scores)),
               );
             },
             shape: RoundedRectangleBorder(
@@ -183,4 +210,21 @@ class _AnswerAnimalState extends State<AnswerAnimal> {
       ),
     );
   }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
+    );
+  }
+
+
 }

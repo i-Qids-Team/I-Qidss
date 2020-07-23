@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class DataService {
-    //------- Here is how we implement 'Singleton pattern' in Dart --------
+  //------- Here is how we implement 'Singleton pattern' in Dart --------
   static final DataService _instance = DataService._constructor();
   factory DataService() {
     return _instance;
@@ -14,10 +13,10 @@ class DataService {
 
   // TODO: change the baseUrl to your own REST API service hosted on Firebase (or heroku)
 
-  static const String baseUrl =
-      'https://us-central1-i-qids.cloudfunctions.net/score';
+  static const String baseUrl =  'https://us-central1-i-qids.cloudfunctions.net/score';
+ 
 
- Future get(String endpoint) async {
+  Future get(String endpoint) async {
     final response = await http.get('$baseUrl/$endpoint',
         headers: {'Content-Type': 'application/json'});
 
@@ -56,6 +55,4 @@ class DataService {
     }
     throw response;
   }
-
 }
-

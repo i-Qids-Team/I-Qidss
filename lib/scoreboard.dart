@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iqidss/score_models/score.dart';
+import 'package:iqidss/score_services/score_data_service.dart';
 
 class ScoreBoard extends StatefulWidget {
   @override
@@ -6,8 +8,35 @@ class ScoreBoard extends StatefulWidget {
 }
 
 class _ScoreBoard extends State<ScoreBoard> {
+  List<Score> scores = new List<Score>();
+  final dataService = ScoreDataService();
+  Future<List<Score>> _futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureData = dataService.getScoreList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Score>>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            scores = snapshot.data;
+            for (int i = 0; i < snapshot.data.length; i++) {
+              
+              scores[i].id = snapshot.data[i].id;
+              scores[i].score = snapshot.data[i].score;
+            }
+            return _buildMainScreen();
+          } else
+            return _buildFetchingDataScreen();
+        });
+  }
+
+  Scaffold _buildMainScreen() {
     return Scaffold(
         appBar: AppBar(
           title: Text('ScoreBoard!'),
@@ -24,7 +53,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                 trailing: CircleAvatar(
                   backgroundColor: Colors.pink[100],
                   child: Text(
-                    "24",
+                    "${scores[2].score}",
                     style: TextStyle(fontSize: 20.0, color: Colors.black87),
                   ),
                 ),
@@ -38,7 +67,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                 trailing: CircleAvatar(
                   backgroundColor: Colors.green[100],
                   child: Text(
-                    "50",
+                    "${scores[0].score}",
                     style: TextStyle(fontSize: 20.0, color: Colors.black87),
                   ),
                 ),
@@ -52,7 +81,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                 trailing: CircleAvatar(
                   backgroundColor: Colors.purple[100],
                   child: Text(
-                    "40",
+                    "${scores[1].score}",
                     style: TextStyle(fontSize: 20.0, color: Colors.black87),
                   ),
                 ),
@@ -66,7 +95,7 @@ class _ScoreBoard extends State<ScoreBoard> {
                 trailing: CircleAvatar(
                   backgroundColor: Colors.blue[100],
                   child: Text(
-                    "0",
+                    "${scores[3].score}",
                     style: TextStyle(fontSize: 20.0, color: Colors.black87),
                   ),
                 ),
@@ -74,14 +103,27 @@ class _ScoreBoard extends State<ScoreBoard> {
               ),
             ],
           ),
-          
           decoration: BoxDecoration(
             color: Colors.pink[50],
             image: DecorationImage(
-              image: AssetImage("assets/main.gif"),
-              alignment: Alignment.bottomCenter
-            ),
+                image: AssetImage("assets/main.gif"),
+                alignment: Alignment.bottomCenter),
           ),
         ));
+  }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
+    );
   }
 }

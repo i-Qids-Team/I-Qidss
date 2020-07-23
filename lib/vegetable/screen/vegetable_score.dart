@@ -1,4 +1,7 @@
+// import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:iqidss/score_models/score.dart';
+import 'package:iqidss/score_services/score_data_service.dart';
 
 import '../../mainpage.dart';
 
@@ -14,8 +17,39 @@ class VegetableScore extends StatefulWidget {
 }
 
 class _VegetableScoreState extends State<VegetableScore> {
+
+  List<Score> scores = new List<Score>();
+  final dataService = ScoreDataService();
+  Future<List<Score>> _futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureData = dataService.getScoreList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Score>>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+             scores = snapshot.data;
+
+            scores[3].id = snapshot.data[3].id;
+            scores[3].score = snapshot.data[3].score;
+
+            scores[3].score = widget.score;
+            dataService.updateScore(id: scores[3].id, score: scores[3].score);
+
+            return _buildMainPage(context);
+          }
+          else
+           return _buildFetchingDataScreen();
+        });
+  }
+
+  Scaffold _buildMainPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Vegetable Score'),
@@ -68,7 +102,7 @@ class _VegetableScoreState extends State<VegetableScore> {
                   ),
                 ),
                 new Text(
-                  widget.score.toString() +
+                  '${scores[3].score}' +
                       ' / ' +
                       widget.totalQuestion.toString(),
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -96,6 +130,21 @@ class _VegetableScoreState extends State<VegetableScore> {
               ],
             ),
           )),
+    );
+  }
+
+   Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data in progress'),
+          ],
+        ),
+      ),
     );
   }
 }

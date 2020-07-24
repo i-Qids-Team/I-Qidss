@@ -25,40 +25,44 @@ class _HomeShape extends State<HomeShape> {
             fit: BoxFit.fill,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/shape.gif',
-            ),
-            Text("\nI HAVE EDGE(S)\n",
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 25,
-                  color: Colors.black,
-                )),
-            SizedBox(
-              height: 60,
-              width: double.infinity,
-              child: RaisedButton(
-                color: Colors.pink[300],
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(15.0),
-                child: Text("Play Now",
-                    style: TextStyle(fontSize: 25, letterSpacing: 3)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(builder: (context) => new GamePage()),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-              ),
-            ),
-          ],
-        ),
+        child: buildMainPage(context),
       ),
     );
+  }
+
+  Column buildMainPage(BuildContext context) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(
+            'assets/shape.gif',
+          ),
+          Text("\nI HAVE EDGE(S)\n",
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 25,
+                color: Colors.black,
+              )),
+          SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: RaisedButton(
+              color: Colors.pink[300],
+              textColor: Colors.white,
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Play Now",
+                  style: TextStyle(fontSize: 25, letterSpacing: 3)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(builder: (context) => new GamePage()),
+                );
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)),
+            ),
+          ),
+        ],
+      );
   }
 }

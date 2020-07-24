@@ -6,13 +6,12 @@ import 'package:iqidss/score_services/score_data_service.dart';
 import 'GamePage.dart';
 
 class ShapeScore extends StatefulWidget {
-  final int score, totalQuestion, correct, incorrect, notattempted;
+  final int score, totalQuestion, correct, incorrect;
   ShapeScore(
       {this.score,
       this.totalQuestion,
       this.correct,
-      this.incorrect,
-      this.notattempted});
+      this.incorrect});
   @override
   _ShapeScore createState() => _ShapeScore();
 }
@@ -50,10 +49,10 @@ class _ShapeScore extends State<ShapeScore> {
               case 1:
                 achievment = "Good, Keep it up!";
                 break;
-              case 3:
+              case 2:
                 achievment = "Very Good! So close.";
                 break;
-              case 4:
+              case 3:
                 achievment = "Excellent!";
                 break;
               default:
@@ -83,10 +82,10 @@ class _ShapeScore extends State<ShapeScore> {
           automaticallyImplyLeading: false,
         ),
         body: Container(
-            padding: const EdgeInsets.all(68.0),
+            padding: const EdgeInsets.all(100.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/shape_home.gif"),
+                image: AssetImage("assets/bg.png"),
                 fit: BoxFit.fill,
               ),
             ),

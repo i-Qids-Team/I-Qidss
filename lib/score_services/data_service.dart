@@ -11,7 +11,7 @@ class DataService {
   DataService._constructor();
   //---------------------------- end of singleton implementation
 
-  // TODO: change the baseUrl to your own REST API service hosted on Firebase (or heroku)
+
 
   static const String baseUrl =  'https://us-central1-i-qids.cloudfunctions.net/score';
  

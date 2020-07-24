@@ -21,17 +21,6 @@ class _GamePage extends State<GamePage> {
 
     _questions = getQuestion();
 
-    if(index == 4){
-      Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ShapeScore(
-                          score: points,
-                          totalQuestion: _questions.length,
-                          correct: correct,
-                          incorrect: incorrect,
-                        )));
-    }
   }
 
   @override
@@ -123,6 +112,16 @@ class _GamePage extends State<GamePage> {
                               index++;
                               correct++;
                             });
+                          } else if (index == 3) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShapeScore(
+                                          score: points,
+                                          totalQuestion: _questions.length,
+                                          correct: correct,
+                                          incorrect: incorrect,
+                                        )));
                           } else {
                             index++;
                             incorrect++;
@@ -156,11 +155,21 @@ class _GamePage extends State<GamePage> {
                             setState(() {
                               points = points + 1;
                               index++;
-                              correct++;
+                              incorrect++;
                             });
+                          } else if (index == 3) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShapeScore(
+                                          score: points,
+                                          totalQuestion: _questions.length,
+                                          correct: correct,
+                                          incorrect: incorrect,
+                                        )));
                           } else {
                             index++;
-                            incorrect++;
+                            correct++;
                           }
                         },
                         child: Container(

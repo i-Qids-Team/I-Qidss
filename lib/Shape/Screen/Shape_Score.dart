@@ -12,6 +12,7 @@ class ShapeScore extends StatefulWidget {
       this.totalQuestion,
       this.correct,
       this.incorrect});
+
   @override
   _ShapeScore createState() => _ShapeScore();
 }
@@ -36,13 +37,13 @@ class _ShapeScore extends State<ShapeScore> {
           if (snapshot.hasData) {
             scores = snapshot.data;
 
-            scores[1].id = snapshot.data[1].id;
-            scores[1].score = snapshot.data[1].score;
+            scores[2].id = snapshot.data[2].id;
+            scores[2].score = snapshot.data[2].score;
 
-            scores[1].score = widget.score;
-            dataService.updateScore(id: scores[1].id, score: scores[1].score);
+            scores[2].score = widget.score;
+            dataService.updateScore(id: scores[2].id, score: scores[2].score);
 
-            switch (scores[1].score) {
+            switch (scores[0].score) {
               case 0:
                 achievment = "It's okey, try again.";
                 break;
@@ -138,6 +139,7 @@ class _ShapeScore extends State<ShapeScore> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                     side: BorderSide(color: Colors.pink[100], width: 5.0),
+                    
                   ),
                 ),
               ),

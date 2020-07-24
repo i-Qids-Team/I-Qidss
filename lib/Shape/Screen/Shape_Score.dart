@@ -5,38 +5,59 @@ import 'package:iqidss/score_services/score_data_service.dart';
 
 import 'GamePage.dart';
 
-class ScoreBoard extends StatefulWidget {
-  final int finalscore;
-  ScoreBoard(this.finalscore);
-
+class ShapeScore extends StatefulWidget {
+  final int score, totalQuestion, correct, incorrect, notattempted;
+  ShapeScore(
+      {this.score,
+      this.totalQuestion,
+      this.correct,
+      this.incorrect,
+      this.notattempted});
   @override
-  _ScoreBoard createState() => _ScoreBoard();
+  _ShapeScore createState() => _ShapeScore();
 }
 
-class _ScoreBoard extends State<ScoreBoard> {
-
+class _ShapeScore extends State<ShapeScore> {
   List<Score> scores = new List<Score>();
   final dataService = ScoreDataService();
   Future<List<Score>> _futureData;
 
-   @override
+  String achievment = "";
+
+  @override
   void initState() {
     super.initState();
-     _futureData = dataService.getScoreList();
+    _futureData = dataService.getScoreList();
   }
 
   Widget build(BuildContext context) {
     return FutureBuilder<List<Score>>(
-        future:  _futureData,
+        future: _futureData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             scores = snapshot.data;
 
-            scores[2].id = snapshot.data[2].id;
-            scores[2].score = snapshot.data[2].score;
+            scores[1].id = snapshot.data[1].id;
+            scores[1].score = snapshot.data[1].score;
 
-            scores[2].score = widget.finalscore;
-            dataService.updateScore(id: scores[2].id, score: scores[2].score);
+            scores[1].score = widget.score;
+            dataService.updateScore(id: scores[1].id, score: scores[1].score);
+
+            switch (scores[1].score) {
+              case 0:
+                achievment = "It's okey, try again.";
+                break;
+              case 1:
+                achievment = "Good, Keep it up!";
+                break;
+              case 3:
+                achievment = "Very Good! So close.";
+                break;
+              case 4:
+                achievment = "Excellent!";
+                break;
+              default:
+            }
             return _buildMainScreen(context);
           } else
             return _buildFetchingDataScreen();
@@ -44,7 +65,7 @@ class _ScoreBoard extends State<ScoreBoard> {
   }
 
   Scaffold _buildMainScreen(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
         backgroundColor: Colors.red[100],
         appBar: AppBar(
           title: Text('Score'),
@@ -65,12 +86,12 @@ class _ScoreBoard extends State<ScoreBoard> {
             padding: const EdgeInsets.all(68.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/shapebg.gif"),
+                image: AssetImage("assets/shape_home.gif"),
                 fit: BoxFit.fill,
               ),
             ),
             child: Column(children: <Widget>[
-              Text("Congratulations!",
+              Text("$achievment",
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,
@@ -79,7 +100,7 @@ class _ScoreBoard extends State<ScoreBoard> {
               Container(
                 height: 150,
                 child: Image.asset(
-                  'assets/happycat.gif',
+                  'assets/main.gif',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -90,7 +111,10 @@ class _ScoreBoard extends State<ScoreBoard> {
                       fontSize: 30,
                       color: Colors.black,
                       fontWeight: FontWeight.bold)),
-              Text('${scores[2].score}',
+              Text(
+                  widget.score.toString() +
+                      "/" +
+                      widget.totalQuestion.toString(),
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,
@@ -121,7 +145,7 @@ class _ScoreBoard extends State<ScoreBoard> {
             ])));
   }
 
-    Scaffold _buildFetchingDataScreen() {
+  Scaffold _buildFetchingDataScreen() {
     return Scaffold(
       body: Center(
         child: Column(

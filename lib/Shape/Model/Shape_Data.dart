@@ -22,7 +22,7 @@ List<Question> getQuestion(){
   question = new Question();
 
   //Question 3
-  question.setQuestion("Triangle has 3 edges");
+  question.setQuestion("Triangle has 3 edges ?");
   question.setAnswer("True");
   question.setPicture("assets/triangle.png");
   questions.add(question);
@@ -30,7 +30,7 @@ List<Question> getQuestion(){
   question = new Question();
 
   //Question 4
-  question.setQuestion("Cylinder has 2 edges");
+  question.setQuestion("Cylinder has 2 edges ?");
   question.setAnswer("False");
   question.setPicture("assets/cylinder.png");
   questions.add(question);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/shape/Model/MockData.dart';
 
 import 'GamePage.dart';
 
@@ -9,7 +8,6 @@ class HomeShape extends StatefulWidget {
 }
 
 class _HomeShape extends State<HomeShape> {
-  MockData mockData = MockData();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class _HomeShape extends State<HomeShape> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/shapebg.gif"),
+            image: AssetImage("assets/shape_home.gif"),
             fit: BoxFit.fill,
           ),
         ),
@@ -33,7 +31,7 @@ class _HomeShape extends State<HomeShape> {
             Image.asset(
               'assets/shape.gif',
             ),
-            Text("\nRemember Me,\n Remember Shape \n",
+            Text("\nI HAVE EDGE(S)\n",
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   fontSize: 25,

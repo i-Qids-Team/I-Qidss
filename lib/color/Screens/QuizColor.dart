@@ -173,8 +173,10 @@ class _QuizColorState extends State<QuizColor>
                       child: Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(vertical: 12),
+                        height: 60,
+                        width: double.infinity,
                         child: Text(
-                          "Yes",
+                          "True",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,
@@ -208,10 +210,12 @@ class _QuizColorState extends State<QuizColor>
                         }
                       },
                       child: Container(
+                        height: 60,
+                        width: double.infinity,
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(vertical: 12),
                         child: Text(
-                          "No",
+                          "False",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,

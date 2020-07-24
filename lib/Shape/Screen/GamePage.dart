@@ -3,7 +3,7 @@ import 'package:iqidss/mainpage.dart';
 import 'package:iqidss/shape/Model/MockData.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'ScoreBoard.dart';
+import 'Shape_Score.dart';
 
 class GamePage extends StatefulWidget {
   @override

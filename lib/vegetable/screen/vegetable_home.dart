@@ -41,7 +41,7 @@ class _VegetablePageState extends State<VegetablePage> {
                   // Navigator.pushNamed(context, '/vegetable_screen');
                   Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          new VegetableScreen()));
+                          new VegetableScreenPage()));
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

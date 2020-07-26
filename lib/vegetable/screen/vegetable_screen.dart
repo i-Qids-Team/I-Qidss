@@ -1,36 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:iqidss/vegetable/model/vegetableData.dart';
+import 'package:iqidss/vegetable/model/vegetableModel.dart';
 import 'package:iqidss/vegetable/screen/vegetable_score.dart';
+import 'package:iqidss/vegetable/services/vegetable_data_service.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-VegetableData questData = new VegetableData();
-
-class VegetableScreen extends StatefulWidget {
-  @override
-  _VegetableScreenState createState() => _VegetableScreenState();
-}
-
-class _VegetableScreenState extends State<VegetableScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Vegetables'),
-        backgroundColor: Colors.redAccent[100],
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.0),
-        ),
-      ),
-    );
-  }
-}
+//VegetableData questData = new VegetableData();
 
 class VegetableScreenPage extends StatefulWidget {
-  final String _name;
-  VegetableScreenPage(this._name);
-
   @override
   _VegetableScreenPageState createState() => _VegetableScreenPageState();
 }
@@ -41,25 +17,41 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
   int indexAnsw = 0;
   String compliments = '';
 
+  List<VegetableModel> vegetable;
+  final vegeDataService = VegetableDataService();
+  int index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<VegetableModel>>(
+        future: vegeDataService.getAllVegetable(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            vegetable = snapshot.data;
+            return _buildMainScreen(snapshot);
+          }
+          return _buildFetchingDataScreen();
+        });
+  }
+
   void checkAnswer(value) {
-    if (questData.getAnswer() == value) {
-      print('Correct');
-
-      totalCorrect = totalCorrect + 1;
-    } else {
-      print('Wrong');
-    }
-
-    // questData.printQuestionLength();
-    if (totalCorrect < 3) {
-      compliments = 'Needs Improvement';
-    } else {
-      compliments = 'Excellent';
-    }
-    totalQuestion++; //
-
     //check if the question is finish
-    if (questData.questFinish() == true) {
+    if (index == 4) {
+      if (vegetable[index].answerScheme == value) {
+        print('Correct');
+
+        totalCorrect = totalCorrect + 1;
+      } else {
+        print('Wrong');
+      }
+
+      // questData.printQuestionLength();
+      if (totalCorrect < 3) {
+        compliments = 'Needs Improvement';
+      } else {
+        compliments = 'Excellent';
+      }
+
       print('Question is Finish');
       int totalScore = totalCorrect;
       Alert(context: context, title: 'The Game is Over',
@@ -73,13 +65,13 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                       MaterialPageRoute(
                           builder: (context) => VegetableScore(
                                 score: totalScore,
-                                totalQuestion: questData.printQuestionLength(),
+                                totalQuestion: vegetable.length,
                                 compliments: compliments,
                               )));
                 })
           ]).show();
 
-      questData.questReset(); //to reset question
+      index = 0; //to reset question
 
       totalCorrect = 0;
       totalQuestion = 0;
@@ -87,14 +79,29 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
       print(totalCorrect); //to check/test quantity of correct
       print(totalQuestion); //to check.test total question
     } else {
-      //to go to next question
-      questData.nextQuestion();
-    }
-  }
+      if (vegetable[index].answerScheme == value) {
+        print('Correct');
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
+        totalCorrect = totalCorrect + 1;
+      } else {
+        print('Wrong');
+      }
+
+      // questData.printQuestionLength();
+      if (totalCorrect < 3) {
+        compliments = 'Needs Improvement';
+      } else {
+        compliments = 'Excellent';
+      }
+      totalQuestion++; //
+      index++;
+      // vegetable[index+1].question;
+    }
+  } //checkAnswer() end
+
+  Scaffold _buildMainScreen(snapshot) {
+    return Scaffold(
+        body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/vegefruitbg.gif'),
@@ -119,7 +126,10 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                   padding: EdgeInsets.all(20.0),
                   child: Text(
                     // 'Question is here',
-                    questData.getQuestion(),
+                    // questData.getQuestion(),
+                    "${index + 1}/${vegetable.length}" +
+                        " " +
+                        "${vegetable[index].question}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -145,7 +155,8 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                   child: Center(
                     child: Image.asset(
                       // 'Picture is here',
-                      questData.getImage(),
+                      // questData.getImage(),
+                      vegetable[index].assetImage,
                     ),
                   ),
                 ),
@@ -168,7 +179,8 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                     color: Colors.red[50],
                     child: Text(
                       // 'True',
-                      questData.getFirstChoice(),
+                      // questData.getFirstChoice(),
+                      vegetable[index].firstChoice,
                       style: TextStyle(fontSize: 25.0, color: Colors.red),
                     ),
                     onPressed: () {
@@ -176,6 +188,7 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                       // checkAnswer(true);
                       setState(() {
                         checkAnswer(1);
+                        // index++;
                       });
                     },
                   ),
@@ -192,7 +205,8 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                     color: Colors.red[50],
                     child: Text(
                       // 'False',
-                      questData.getSecondChoice(),
+                      // questData.getSecondChoice(),
+                      vegetable[index].secondChoice,
                       style: TextStyle(fontSize: 25.0, color: Colors.red),
                     ),
                     onPressed: () {
@@ -200,6 +214,7 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                       // checkAnswer(false);
                       setState(() {
                         checkAnswer(2);
+                        // index++;
                       });
                     },
                   ),
@@ -207,6 +222,21 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
               ],
             )),
           ]),
+    ));
+  }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching data... Please wait'),
+          ],
+        ),
+      ),
     );
   }
 }

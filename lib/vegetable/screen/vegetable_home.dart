@@ -38,10 +38,9 @@ class _VegetablePageState extends State<VegetablePage> {
                 child: Text("Lets",
                     style: TextStyle(fontSize: 25, letterSpacing: 3)),
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/vegetable_screen');
                   Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          new VegetableScreen()));
+                          new VegetableScreenPage()));
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

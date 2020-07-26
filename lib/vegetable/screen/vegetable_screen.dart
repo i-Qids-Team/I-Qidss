@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:iqidss/vegetable/model/vegetableData.dart';
 import 'package:iqidss/vegetable/model/vegetableModel.dart';
 import 'package:iqidss/vegetable/screen/vegetable_score.dart';
 import 'package:iqidss/vegetable/services/vegetable_data_service.dart';
@@ -20,7 +19,6 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
 
   List<VegetableModel> vegetable;
   final vegeDataService = VegetableDataService();
-  // Future<List<VegetableModel>> _vegeFutureData;
   int index = 0;
 
   @override
@@ -36,20 +34,7 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
         });
   }
 
-  // void initsState() {
-  //   super.initState();
-  //   _vegeFutureData = vegeDataService.getAllVegetable();
-  //   // vegetable = q.getAllVegetable();
-  // }
-
   void checkAnswer(value) {
-    // if (questData.getAnswer() == value) {
-    //   print('Correct');
-
-    //   totalCorrect = totalCorrect + 1;
-    // } else {
-    //   print('Wrong');
-    // }
     //check if the question is finish
     if (index == 4) {
       if (vegetable[index].answerScheme == value) {
@@ -86,7 +71,6 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                 })
           ]).show();
 
-      // questData.questReset(); //to reset question
       index = 0; //to reset question
 
       totalCorrect = 0;
@@ -95,9 +79,6 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
       print(totalCorrect); //to check/test quantity of correct
       print(totalQuestion); //to check.test total question
     } else {
-      //to go to next question
-      // questData.nextQuestion();
-
       if (vegetable[index].answerScheme == value) {
         print('Correct');
 
@@ -146,7 +127,8 @@ class _VegetableScreenPageState extends State<VegetableScreenPage> {
                   child: Text(
                     // 'Question is here',
                     // questData.getQuestion(),
-                    "${index + 1}/${vegetable.length}" + " " +
+                    "${index + 1}/${vegetable.length}" +
+                        " " +
                         "${vegetable[index].question}",
                     textAlign: TextAlign.center,
                     style: TextStyle(

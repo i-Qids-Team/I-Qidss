@@ -1,5 +1,5 @@
-import 'package:iqidss/vegetable/model/vegetableModel.dart';
-import 'package:iqidss/vegetable/services/vegetable_rest_service.dart';
+import '../model/vegetableModel.dart';
+import 'vegetable_rest_service.dart';
 
 class VegetableDataService {
   static final VegetableDataService _instance =

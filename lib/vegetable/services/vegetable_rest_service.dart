@@ -11,7 +11,7 @@ class RestService {
   RestService._constructor();
 
   static const String baseUrl =
-      'https://us-central1-i-qids.cloudfunctions.net/api';
+      'https://us-central1-i-qids.cloudfunctions.net/vegetable';
 
   Future get(String endpoint) async {
     final response = await http.get('$baseUrl/$endpoint');
